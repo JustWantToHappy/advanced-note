@@ -12,10 +12,10 @@ KMP算法是一种字符串匹配算法，可以在O(n+m)的时间复杂度内�
 2. 如果匹配不成功，返回-1
 
 ## next的计算思想
-![Alt text](images/image5.png)
-![Alt text](images/image6.png)
+![Alt text](image5.png)
+![Alt text](image6.png)
 也就是说真前缀和真后缀的值要尽可能大，这样移动的模式串移动的距离就是最远的
 所以求next数组的值只需要通过模式串就可以计算
-![Alt text](images/image7.png)
-![Alt text](images/image8.png)
-![Alt text](images/image9.png)
+![Alt text](image7.png)
+![Alt text](image8.png)
+![Alt text](image9.png)
