@@ -60,7 +60,7 @@ stream的命令都是以x开头,因为发布订阅无法持久化，无法保存
 - xdel 消息队列名称 消息id：删除消息
 - xtrim 消息队列名称 maxlen 0：删除当前消息频道下的所有消息。
 - xread count 消息数量 block 阻塞时间 streams 消息队列名称 开始下标：表示从开始下标读取消息队列中指定数量的消息，如果没有读取出来则阻塞指定的时间。(如果想要获取从现在开始之后的消息，可以将开始下标改为$)
-- xgroup creat 消息队列名称 组名称 组id,用于创建消费组
+- xgroup create 消息队列名称 组名称 组id,用于创建消费组
 - xinfo groups 消息队列名称：用来查看消费组的信息
 - xgroup creatconsumer 消息队列名称 组名称 消费者名字:用于创建消费者
 - xreadgroup group 组名称 消费者名字 count 消息数量 block 阻塞时间 streams 消息队列名称 >(>表示读取最新的消息)
