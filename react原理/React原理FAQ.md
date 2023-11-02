@@ -29,4 +29,11 @@ const HooksDispatcherOnUpdate: Dispatcher = {
   // ...省略
 };
 ```
+- jsx会被编译为React.createElement,React.createElement会返回一个叫做"ReactElement"的js对象，例如:
+```tsx
+import React from 'react'
+<div className='text'>text</div>
+//以上jsx会被编译为:
+React.createElement('div',{className:'text'},'text')
+```
 
