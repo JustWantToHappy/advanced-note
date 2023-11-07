@@ -9,7 +9,7 @@
 2. 使用DockerFile创建镜像
 3. 使用镜像创建和运行容器
 ## Docker相关命令
-
+- docker inspect 容器:用于获取容器的详细信息
 - docker images:查看所有镜像
 - docker build -t 镜像名称 .:在当前目录下构建一个镜像
 - docker run 镜像名称：运行镜像
