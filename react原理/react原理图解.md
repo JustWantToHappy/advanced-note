@@ -14,6 +14,8 @@ hook={
 }
 ```
 ## updateQueue属性
+- 批量更新，在一次更新操作中，React会遍历updateQueue链表，合并相同类型的更新操作，只执行最新的更新，这样可以提高更新的效率和性能
+- 异步更新：当组件处于concurrent模式下的时候，React可以根据更新的优先级和时间片来进行适当的渲染工作
 ![Alt text](image-1.png)
 ## React Fiber和React Element之间的联系
 ![Alt text](image-2.png)
@@ -21,7 +23,23 @@ hook={
 react15：jsx——>render function——>vdom
 react16:jsx——> render function——>vdom——>fiber
 ![Alt text](image-3.png)
+```tsx
+const App=()=>{
+  const [state1,setState1]=React.useState(0)
+  const [state2,setState2]=React.useState(0)
 
+  const changeState=()=>{
+    setState1(state=>state+1)
+    setState1(state=>state+1)
+    setState2(state=>state+1)
+    setState2(state=>state+1)
+  }
+  return <div>
+  <button onClick={changeState}>change state</button>
+  </div>
+}
+```
+> 对于同一种setState，是通过queue.pending的环状链表实现的，但是对于不同类型的setState，我猜测应该是updateQueue进行的合并更新，可以参考上面的示例代码
 ## 调度器Scheduler
 作用:通过优先级调度和时间切片的方式，来对组件的更新和渲染进行调度和分片处理。
 根据任务的优先级和时间片的大小决定哪些任务应该优先执行，哪些应该等待下一轮空闲时间再执行。
