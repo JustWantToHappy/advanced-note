@@ -1,6 +1,8 @@
 ## 使用Docker来使用redis
-- 使用redis必须使用docker运行redis对应容器,如果要进入到redis-cli客服端，则需要使用docker exec -it 容器id或者容器名称 redis-cli,如果之前还设置了用户密码，则在redis-cli中使用auth 用户密码命令方可进入
+- 使用redis必须使用docker创建并运行redis对应容器,比如:docker run -d -p 6379:6379 -v 配置文件路径:/usr/local/etc/redis/redis.conf  --name 容器名称 redis
+- 如果要进入到redis-cli客服端，则需要使用docker exec -it 容器id或者容器名称 redis-cli,如果之前还设置了用户密码，则在redis-cli中使用auth 用户密码命令方可进入
 - 默认中文会以十六进制的形式展示，如果想要展示中文，可以在使用docker exec命令的使用添加参数--raw
+- docker exec -it 容器 /bin/bash：进入到当前容器的目录之中
 ## redis-cli相关命令
 
 - set key value
@@ -111,7 +113,9 @@ exec
 ## 持久化
 因为redis是一个基于内存的数据库，如果服务器重启或者断电，那么之前的所有的数据就会都丢失，所以需要进行持久化
 ### 方案
-- RDB:在指定时间间隔内，将内存中的数据快照写入磁盘
+- RDB:在指定时间间隔内，将内存中的数据快照写入磁盘(某一个时间点上数据的完整副本)
+    - redis.conf配置文件中的save 300 100表示在300s内，如果有100次修改才会有一次快照
+    - 在redis客服端通过save命令手动生成快照
 - AOF：AOF文件
 
 ## 主从复制

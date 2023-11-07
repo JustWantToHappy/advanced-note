@@ -20,6 +20,7 @@
 - docker restart 容器id:重启容器
 - docker pause 容器id：暂停容器中所有进程，使用docker pause命令之后如果想要使容器恢复运行，则使用docker unpause 容器id
 - docker stop 容器：停止容器
+- docker rm 容器:删除容器
 ## DockerCompose
 
 - docker-components.yml
