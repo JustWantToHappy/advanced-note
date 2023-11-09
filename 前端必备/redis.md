@@ -1,10 +1,12 @@
 ## 使用Docker来使用redis
-- 使用redis必须使用docker创建并运行redis对应容器,比如:docker run -d -p 6379:6379 -v 配置文件路径:/usr/local/etc/redis/redis.conf  --name 容器名称 redis
+- 使用redis必须使用docker创建并运行redis对应容器,比如:docker run -d -p 6379:6379 -v 配置文件路径 -v 外部配置文件路径:/etc/redis/redis.conf  --name 容器名称 redis redis-server 内部配置文件路径 
+    - 其中/etc/redis/redis.conf指的就是内部配置文件路径
+    - 其中--name redis表示手动设置配置文件中的配置，也可以通过--appendonly yes这样配置其他选项
 - 如果要进入到redis-cli客服端，则需要使用docker exec -it 容器id或者容器名称 redis-cli,如果之前还设置了用户密码，则在redis-cli中使用auth 用户密码命令方可进入
 - 默认中文会以十六进制的形式展示，如果想要展示中文，可以在使用docker exec命令的使用添加参数--raw
-- docker exec -it 容器 /bin/bash：进入到当前容器的目录之中
+- docker exec -it 容器 /bin/bash：用于进入正在运行的 Docker 容器并打开一个交互式的 Bash 终端。
 ## redis-cli相关命令
-
+- 在容器的bash下，可以通过redis-cli命令进入到redis-client，默认使用redis-cli命令连接到的是6380对应的redis服务端，如果要指定端口，可以通过redis-cli -p 端口号连接到对应的redis服务器。
 - set key value
 - setnx key value:设置键值对，如果键已经存在，则不做任何处理，否则新建键值对
 - get key
@@ -18,7 +20,6 @@
 - ttl key:查看key键过期时间
 - expire key 过期时间：给键值对设置过期时间，也可以通过setex key value 过期时间来设置过期时间和值
 ## 列表
-
 - lpush letter a:表示向数组letter中push一个“a”字符串，注意，每次lpush都是将最新的元素从左到右添加，所以是从头部添加，如果想要从尾部添加，可以使用rpush命令
 - lpush letter a b c d e:从左到右依次向数组letterpush多个元素
 - lpop和rpop命令：表示分别从列表的头部或者尾部将元素删除
@@ -113,11 +114,27 @@ exec
 ## 持久化
 因为redis是一个基于内存的数据库，如果服务器重启或者断电，那么之前的所有的数据就会都丢失，所以需要进行持久化
 ### 方案
-- RDB:在指定时间间隔内，将内存中的数据快照写入磁盘(某一个时间点上数据的完整副本)
-    - redis.conf配置文件中的save 300 100表示在300s内，如果有100次修改才会有一次快照
-    - 在redis客服端通过save命令手动生成快照
-- AOF：AOF文件
-
+- RDB:在指定时间间隔内，将内存中的数据快照写入磁盘(某一个时间点上数据的完整副本),RDB持久化过程是由子进程负责，会将数据写入到临时文件，待持久化结束之后，再用这个临时文件替换上次持久化的文件，整个过程中主进程不需要任何io操作，保证极高的性能，阻塞只发生在fork阶段，一般来说时间很短。
+- AOF：AOF文件，维护了一个缓冲区，每次redis更新的命令都会记录在缓冲区，然后再从缓冲区写到AOF文件中，下一次开启时将AOF文件中的指令全部重新执行一遍。
+### RDB方案
+#### bgsave命令
+通过主进程去fork一个子进程，让子进程创建临时文件
+#### save命令
+通过redis主进程去创建临时文件
+#### 手动配置
+在redis.conf配置文件中设置，比如save 900 1,表示如果在900s之后，如果至少有一个key发生了变化，则生成dump.rdb内存快照，对于这种save规则可以设置多个。 
+### AOF方案
+在redis.conf配置文件中设置appendonly:yes即可，否则默认采用的就是RDB的方式
+- appendFsync:no:当缓冲区满了之后再将指令写入到AOF文件,然后清空缓存区
+- appendFsync:always:每次更新操作，都进行一次IO操作
+- appendFsync:everysec:每隔一秒进行IO操作，折中操作
+![Alt text](image-5.png)
+#### AOF重写机制
+解决AOF文件满了的情况
+- 手动触发：bgrewriteaof命令
+- 自动触发(配置文件)
+    - auto-aof-rewrite-min-size:AOF文件最小重写大小，只要当AOF文件大小大于该值的时候才可能冲洗，4.0默认配置64mb，在生产环境下一般设置为5~10GB左右
+    - auto-aof-rewrite-pecrentage
 ## 主从复制
 是指将一台redis服务器的数据复制到其他redis服务器
 ![Alt text](image-4.png)

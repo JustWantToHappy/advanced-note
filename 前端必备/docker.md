@@ -1,5 +1,6 @@
 ## 基本原理和概念
 - 仓库集中存储和管理Docker镜像，Docker容器就是Docker镜像的实例
+- docker一次封装，到处运行。
 
 `docker daemon是服务端的守护线程`
 ![Alt text](image-2.png)
