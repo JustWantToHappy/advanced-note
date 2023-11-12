@@ -8,7 +8,7 @@
 知识代码风格的校验，不会对代码质量进行校验
 ## 如何解决eslint和prettier的一些配置规则带来的冲突问题？
 一般解决思路是禁用掉eslint与prettier中冲突的规则，然后使用prettier做格式化，eslint做代码校验
-### 解决方案
+## 解决方案
 ```js
 module.exports={
     plugins: ['@typescript-eslint/eslint-plugin'],
@@ -20,8 +20,19 @@ module.exports={
 	 */
 	extends: [
         'plugin:@typescript-eslint/recommended',
+        //注意:eslint8.0以及以上版本中,'prettier/@typescript-eslint'已经被合并到prettier中了，这里可以移除
         'prettier/@typescript-eslint',
          'prettier',
         ],
 }
+```
+## 运行eslint和prettier配置文件规则
+```json
+{
+    "script":{
+        "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+        "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    }
+}
+//yarn lint后yarn format
 ```
