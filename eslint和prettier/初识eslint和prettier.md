@@ -11,17 +11,13 @@
 ## 解决方案
 ```js
 module.exports={
-    plugins: ['@typescript-eslint/eslint-plugin'],
+    plugins: ['@typescript-eslint/eslint-plugin','prettier'],
     /**
 	 * 1. eslint-config-prettier 可简写成 prettier,禁用eslint与prettier冲突的规则
-	 * 2. prettier/@typescript-eslint.js是用来禁用@typescript-eslint/eslint-plugin与prettier冲突的规则的
-	 * @typescript-eslint/eslint-plugin是用来校验ts文件的
-     * 3. 'plugin:@typescript-eslint/recommended'是插件@typescript-eslint关于eslint的配置规则文件
+     * 2. 'plugin:@typescript-eslint/recommended'是插件@typescript-eslint关于eslint的配置规则文件
 	 */
 	extends: [
         'plugin:@typescript-eslint/recommended',
-        //注意:eslint8.0以及以上版本中,'prettier/@typescript-eslint'已经被合并到prettier中了，这里可以移除
-        'prettier/@typescript-eslint',
          'prettier',
         ],
 }
