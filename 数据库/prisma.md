@@ -40,3 +40,6 @@ model UserRole {
   @@map("user_role")
 }
 ```
+
+## prisma坑
+- 在同一级别中，当使用了include的时候就不可以使用select了。
