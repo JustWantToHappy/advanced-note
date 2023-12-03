@@ -62,3 +62,9 @@ console.log("test")
 `<font color="green">sbsdfasdf</font>`
 ## Tips
 可以直接在md文件中使用标签，通过设置style行内样式
+
+## 表格
+|  表头   | 表头  |
+|  ----  | ----  |
+| 单元格  | 单元格 |
+| 单元格  | 单元格 |
