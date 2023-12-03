@@ -35,3 +35,46 @@
     }
 </style>
 ```
+
+## css容器查询
+### 全局容器查询
+```html
+@media (max-width:300px){
+    .card h2 {
+    font-size: 2em;
+  }
+}
+```
+### 局部容器查询
+```html
+<style>
+    .post {
+  container-type: inline-size;
+  container-name: sidebar;
+}
+@container sidebar (min-width: 700px) {
+  .card {
+    font-size: 2em;
+  }
+}
+</style>
+```
+## attr()函数
+```html
+<style>
+    width:attr(data-width);
+    </style>
+<html>
+    <div data-width="100px"></div>
+</html>
+```
+
+## env函数
+用于获取环境变量的值
+```html
+    <style>
+        div {
+           width: env(safe-area-inset-left);
+        }
+    </style>
+```
