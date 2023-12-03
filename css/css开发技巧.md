@@ -13,3 +13,10 @@
     <img src="2.jpg">
 </div>
 ```
+> 建议使用js实现
+## css变量使用技巧
+```javascript
+//给css变量--c1设置属性值#fff
+html.style.setAttribute("--c1","#fff");
+可以使用一些库提取出图片主要的背景颜色，然后通过这种方式给页面设置背景色(图片调色盘)
+```
