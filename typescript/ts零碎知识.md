@@ -19,12 +19,23 @@ type Demo={
     [key:string]:string;
 }
 ```
-### as const
+## as const
 as const是一种类型断言，它将一个表达式断言为不可变的常量
 ```typescript
 //这里加上as const会使ts推断出更加具体的类型信息，不加上as const则是普通的string类型
 const colors = ["red", "green", "blue"] as const;
 
 type Color = (typeof colors)[number];//"red"|"green"|"blue"
+
+```
+
+## Awaited
+```typescript
+const fetchData = async () => {
+	return ["1", "2"];
+};
+
+type PromiseDataType = ReturnType<typeof fetchData>;//Promise<string[]>
+type DataType = Awaited<ReturnType<typeof fetchData>>; //string[]
 
 ```

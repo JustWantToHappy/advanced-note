@@ -70,3 +70,11 @@ ctx.closePath();
 - 弧度角度公式：弧度=(角度*Math.PI)/180
 - 默认是顺时针
 - 以圆心到3点钟方向开始顺时针画弧
+## ctx.moveTo
+ctx.moveTo(x,y)：将画笔抬起来之后移动到(x,y)
+## ctx.lineTo
+ctx.lineTo(x,y)将
+## ctx.strokeStyle
+ctx.strokeStyle = "red";用于设置描边的颜色
+## ctx.fillStyle
+用于设置填充的背景色
