@@ -16,3 +16,8 @@
 1. Diff算法只会同层进行
 2. 类型一致的节点才有继续diff的必要性
 3. key属性的设置，可以帮助我们尽可能重用同一层级的节点
+
+## React何时重用节点(针对setCount的情况)
+- 首次挂载的时候，会创建整棵WorkInProgress树，此时的current树只有FiberRoot节点以及rootFiber节点,
+- 第一次更新的时候，workInProgress树的rootFiber.alternate不为空，会复用一个节点，然后剩余的子节点都不存在，没有alternate属性指向current树，所以第一次更新的时候，只会复用一个节点，其他节点都会重新创建
+- 第二次更新的时候，此时workInProgress树和current树alternate相互连接，此时构建workInProgress树的时候就会去尝试复用对应的alternate的current中的节点。
