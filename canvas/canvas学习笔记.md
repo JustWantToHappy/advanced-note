@@ -78,3 +78,33 @@ ctx.lineTo(x,y)将
 ctx.strokeStyle = "red";用于设置描边的颜色
 ## ctx.fillStyle
 用于设置填充的背景色
+## ctx.arcTo
+除了arcTo可以画圆弧，ctx.arcTo也可以
+```javascript
+	//获取画笔上下文对象
+			const ctx = canvas.getContext("2d");
+			ctx?.beginPath();
+			//设置第一个点
+			ctx?.moveTo(300, 200);
+			//设置第二个点和第三个点以及半径
+			ctx?.arcTo(300, 250, 250, 250, 50);
+			ctx?.stroke();
+			ctx?.closePath();
+```
+## 二次贝塞尔曲线
+ctx.quadraticCurveTo(cpx, cpy, x, y);
+```javascript
+	ctx.beginPath();
+	//起始点
+	ctx.moveTo(50, 20);
+	//控制点和终点坐标
+	ctx.quadraticCurveTo(230, 30, 50, 100);
+	ctx.stroke();
+	ctx.closePath();
+```
+### 三次贝塞尔曲线
+```javascript
+ctx.moveTo(50,20)//起始点
+//需要两个控制点以及一个终点
+ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+```
