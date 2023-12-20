@@ -101,6 +101,20 @@ ctx.quadraticCurveTo(cpx, cpy, x, y);
 	ctx.quadraticCurveTo(230, 30, 50, 100);
 	ctx.stroke();
 	ctx.closePath();
+//如下是一个聊天框使用贝塞尔曲线实现
+			ctx.beginPath();
+			//起始点
+			ctx.moveTo(300, 300);
+			//控制点和终点坐标
+			ctx.quadraticCurveTo(350, 270, 330, 250);
+			ctx.quadraticCurveTo(300, 240, 310, 240);
+			ctx.quadraticCurveTo(280, 210, 310, 150);
+			ctx.quadraticCurveTo(400, 130, 460, 150);
+			ctx.quadraticCurveTo(480, 220, 460, 240);
+			ctx.quadraticCurveTo(400, 280, 380, 260);
+			ctx.quadraticCurveTo(360, 280, 300, 300);
+			ctx.stroke();
+			ctx.closePath();
 ```
 ### 三次贝塞尔曲线
 ```javascript
