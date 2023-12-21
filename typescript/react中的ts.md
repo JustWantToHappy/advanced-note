@@ -32,5 +32,5 @@ declare global {
 }
 ```
 - React.ReactElement：这是一个有type、props、key的对象，被createElement函数调用，根据环境设置对应的属性
-- React.ReactNode:ReactNode:<div></div>的合法类型，React.ReactElement是React.ReactNode的子类型
+- React.ReactNode:React.ReactElement是React.ReactNode的子类型
 - React.FC<React.PropsWithChildren>
