@@ -100,3 +100,21 @@ margin-left的作用
 margin-right的作用
 ## writing-mode
 定义了文本水平或垂直排布以及在块级元素中文本的行进方向
+## animation-direction
+animation-direction CSS 属性设置动画是应正向播放、反向播放还是在正向和反向之间交替播放。
+```html
+<style>
+    .container{
+        animation:demo linear 1s infinite alternate;
+    }
+    //往返运动
+    @keyframes demo{
+        from{
+            transform:tranlateY(-10px);
+        }
+        to{
+            transform:translateY(10px);
+        }
+    }
+</style>
+```

@@ -66,3 +66,21 @@ console.log(([][[]]+[])[+!![]]+([]+{})[!+[]+!![]]) // "nb"
 console.log(JSON.parse("{a:1}")) // {a:1}
 
 ```
+#### ==的隐式转换规则
+- 特殊情况
+    - undefined==null
+    - NaN!=NaN
+- 类型相同:比较值
+- 类型不同
+    - 均为原始值：转换为数字比较
+    - 一端为原始值，一端为对象：先调用valueOf，若无法转换为原始值，再调用toString
+```javascript
+//例子
+const a={
+    n:1,
+    valueOf(){
+        return this.n++;
+    }
+}
+console.info(a==1&&a==2&&a==3)//true
+```

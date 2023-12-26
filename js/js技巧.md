@@ -8,3 +8,14 @@ if(b>c){
     a+=1
 }
 ```
+## 结束外层循环
+标记语法
+```javascript
+outerloop: for (let i = 0; i < 10; i++) {
+	for (let j = 0; j < 10; j++) {
+		if (i + j > 10) {
+			break outerloop
+		}
+	}
+}
+```
