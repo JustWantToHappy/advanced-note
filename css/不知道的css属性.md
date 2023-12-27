@@ -37,15 +37,6 @@
 ```
 
 ## css容器查询
-### 全局容器查询
-```html
-@media (max-width:300px){
-    .card h2 {
-    font-size: 2em;
-  }
-}
-```
-### 局部容器查询
 ```html
 <style>
     .post {
@@ -57,6 +48,16 @@
     font-size: 2em;
   }
 }
+</style>
+```
+## 媒体查询写法
+```html
+<style>
+/*表示当屏幕小于640px的时候*/
+@media not all and (min-width: 640px) { ... }
+/*表示当屏幕大于等于640px的时候,两种写法*/
+@media (min-width: 640px) { ... }
+@media screen and (min-width:640px){...}
 </style>
 ```
 ## attr()函数
@@ -84,7 +85,6 @@
 
 ## unset
 作用：给css属性设置这个值之后，如果这个属性能继承就会继承，不能继承就会使用默认值
-
 ## revert
 作用：把css属性设置成为浏览器的一个默认值.并不是w3c的默认值,比如：
 ```html
