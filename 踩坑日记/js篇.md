@@ -27,3 +27,5 @@ btn.onclick=function(){
     }
 }
 ```
+### 如何解决动态集合问题?
+h5中新增的API:documet.querySelectorAll()方法获取静态集合
