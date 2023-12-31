@@ -124,6 +124,10 @@ animation-direction CSS 属性设置动画是应正向播放、反向播放还�
     }
 </style>
 ```
+## animation-timing-function
+- 值可以是ease,linear,ease-in-out,ease-in
+- 值可以是steps函数
+- 值可以是贝塞尔函数
 ## clamp函数
 `clamp()`函数的作用是把一个值限制在一个上限和下限之间，当这个值超过最小值和最大值的范围时，在最小值和最大值之间选择一个值使用。它接收三个参数：最小值、首选值、最大值。
 ```scss
