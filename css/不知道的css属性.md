@@ -55,7 +55,7 @@
 }
 </style>
 ```
-## 媒体查询写法
+## 媒体查询
 ```html
 <style>
 /*表示当屏幕小于640px的时候*/
@@ -63,6 +63,8 @@
 /*表示当屏幕大于等于640px的时候,两种写法*/
 @media (min-width: 640px) { ... }
 @media screen and (min-width:640px){...}
+/*当暗黑模式下可以在这里面设置css变量的值用于切换主题*/
+@media (prefers-color-scheme: dark){}
 </style>
 ```
 ## attr()函数
