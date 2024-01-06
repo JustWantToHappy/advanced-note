@@ -138,3 +138,14 @@ font-size: clamp(1rem, 2.5vw, 2rem);
 - 当2.5vw大于2rem的时候，使用2rem
 - 当2.5vw小于1rem的时候，使用1rem
 - 其他使用2.5vw
+
+## white-space
+white-space 属性用于设置如何处理元素内的空白字符。
+```html
+<style>
+    /**
+    不换行
+    */
+    white-space:nowrap;
+</style>
+```
