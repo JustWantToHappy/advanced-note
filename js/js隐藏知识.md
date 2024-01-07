@@ -3,5 +3,3 @@
 2. toNumber操作，一旦得到原始值，接下来就是通过ToNumber操作将其转换为数字，这一步会考虑原始值的类型：
     - 如果原始值已经是一个Number类型，直接返回
     - 如果原始值是一个字符串，js会尝试将其转换为数字，如果可以转换为有效数字，则返回
-## matchMedia
-- matchMedia("(prefers-color-schema:dark)")匹配当前系统主题是否是dark
