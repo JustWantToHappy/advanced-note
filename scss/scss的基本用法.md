@@ -6,3 +6,21 @@ $width:math.div(100,10)px
 //编译结果
 --width:1px;
 ```
+
+## &
+&表示当前选择器
+```scss
+@mixin useTheme(){
+    html[data-theme="dark"] &{
+        background:red;
+        color:#fff;
+    }
+}
+.item{
+    @include useTheme;
+}
+//编译结果
+html[data-theme="dark"] .item{
+    //...
+}
+```
