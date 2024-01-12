@@ -149,3 +149,16 @@ white-space 属性用于设置如何处理元素内的空白字符。
     white-space:nowrap;
 </style>
 ```
+## word-break
+```html
+<style>
+    word-break:break-word;//强制换行
+word-break:break-all;//允许单词内部换行
+word-break:keep-all//允许单词之间换行
+</style>
+```
+## text-shadow
+用于设置文字阴影,每个阴影值由元素在 X 和 Y 方向的偏移量、模糊半径和颜色值组成。
+```html
+text-shadow: 1px 1px 2px pink;
+```
