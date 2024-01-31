@@ -18,3 +18,21 @@ const loading = document.querySelector(".loading");
 	);
 	ob.observe(loading as HTMLImageElement);
 ```
+## ResizeObserver
+`ResizeObserver`接口监视Element内容盒或边框盒尺寸的变化
+```html
+<body>
+	<div class="container"></div>
+	<script>
+		const container = document.querySelector(".container")
+		const observer = new ResizeObserver((entries) => {
+			for (const entry of entries) {
+				//这里打印的是内容盒的尺寸变化
+				console.log(entry.contentBoxSize);
+			}
+		})
+		observer.observe(container)
+
+	</script>
+</body>
+```
