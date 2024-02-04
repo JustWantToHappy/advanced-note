@@ -29,13 +29,19 @@ type Color = (typeof colors)[number];//"red"|"green"|"blue"
 
 ```
 
-## Awaited
+## 重命名
 ```typescript
-const fetchData = async () => {
-	return ["1", "2"];
+interface Student {
+	id: string;
+	name?: string;
+	age?: number;
+}
+
+type RenameKeys<T> = {
+	[P in keyof T as `get${P & string}`]: T[P];
 };
 
-type PromiseDataType = ReturnType<typeof fetchData>;//Promise<string[]>
-type DataType = Awaited<ReturnType<typeof fetchData>>; //string[]
+const obj:RenameKeys<Student>
+obj.getage;
 
 ```
