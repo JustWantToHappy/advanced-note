@@ -162,3 +162,19 @@ word-break:keep-all//允许单词之间换行
 ```html
 text-shadow: 1px 1px 2px pink;
 ```
+## background-position
+- 一个值的用法用来指定把这个项目（原文为 item）放在哪一个边界。另一个维度被设置成 50%，所以这个项目（原文为 item）被放在指定边界的中间位置。
+```html
+<style>
+    .container{
+        background-position:top;
+    }
+</style>
+```
+
+## box-shadow
+如果没有指定`inset`，默认阴影在边框外，即阴影向外扩散
+```html
+/* 插页 (阴影向内) | x 偏移量 | y 偏移量 | 阴影颜色 */
+box-shadow: inset 5em 1em gold;
+```
