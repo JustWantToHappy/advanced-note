@@ -11,7 +11,7 @@ let a;//number
 ```javascript
 /**
  * 
- * @returns {Function}
+ * @returns {Function} 返回一个函数
  */
 function bbb() {
 	return function () {
@@ -23,8 +23,8 @@ function bbb() {
 ```javascript
 /***
  * @param {Object} a
- * @param {string} a.name
- * @param {number} a.age
+ * @param {string} a.name 名称
+ * @param {number} a.age 年龄
  */
 function demo(a) {
 
@@ -52,4 +52,34 @@ let a;
  * @type TableRow
  */
 let a;
+```
+## ts中的注释
+ts注释不需要指定类型
+```typescript
+import React from "react";
+/**
+ *使用防抖动的函数
+ *
+ * @param fn 需要进行防抖的函数
+ * @param delay 延迟时间，默认是100ms
+ * @param immediate 是否立即执行，默认是false
+ * @returns 返回防抖之后的函数
+ */
+export function useDebouce<T extends (...args: unknown[]) => unknown>(
+	fn: T,
+	delay = 100,
+	immediate = false,
+) {
+	const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>();
+
+	const debouceFn = React.useCallback(
+		(...args: unknown[]) => {
+			...
+		},
+		[fn, delay, immediate],
+	);
+
+	return debouceFn;
+}
+
 ```
