@@ -19,6 +19,16 @@ type Demo={
     [key:string]:string;
 }
 ```
+## 映射类型
+ts许多内置类型中都使用了映射类型
+```typescript
+type Partial<T>={
+	[P in keyof T]?:T[P]
+}
+type B={
+	[P in string]:any;
+}
+```
 ## as const
 as const是一种类型断言，它将一个表达式断言为不可变的常量
 ```typescript
@@ -43,5 +53,14 @@ type RenameKeys<T> = {
 
 const obj:RenameKeys<Student>
 obj.getage;
+
+```
+## ts类型推断
+```typescript
+type UnionTest = ((x: { a: string }) => any) | ((x: { b: number }) => any);
+
+function fn(cb: UnionTest) {
+	cb({ a: "1", b: 1 });//这里推导出来的类型是{a:string}&{b:number}
+}
 
 ```
