@@ -5,12 +5,26 @@ type B=string|null;
 type C=A&B;//string;
 ```
 ## 索引类型查询
-```typescrpt
+- key为字符串
+```typescript
 export interface ViewTableProps {
 	onChange: () => void;
 }
 
 const sb: ViewTableProps["onChange"] = function () { }
+```
+- key为number,T[number]
+```typescript
+const tuple = ["tesla", "model 3", "model X", "model Y"] as const;
+
+type TupleToObject<T extends readonly (string | symbol | number)[]> = {
+	[P in T[number]]: P;
+};
+```
+- 如果要访问指定的数字下标，可以使用T[0],T[1]...
+- 如果泛型是个数组，可以通过T["length"]得到长度
+```typescript
+type Length<T extends unknown[]> = T["length"];
 ```
 ### 与索引类型签名的区别
 索引类型签名用于描述对象中可以包含任意属性的方式,例如：
@@ -64,3 +78,4 @@ function fn(cb: UnionTest) {
 }
 
 ```
+

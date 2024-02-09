@@ -3,6 +3,8 @@
 ## 功能介绍
 - 开发模式:仅能够编译js中的`ESM`语法
 - 生产模式:能够编译JS中的`ESM`语法，还能够压缩JS代码
+    1. 优化代码运行性能
+    2. 优化代码打包速度
 ## 下载
 - `npm i webpack webpack-cli -D`
 ## 启动webpack
