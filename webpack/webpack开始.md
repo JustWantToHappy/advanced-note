@@ -22,3 +22,8 @@ npx webpack ./src/main.js --mode=production
 //会自动查找配置文件并加载
 npx webpack
 ```
+## 优化方面
+1. 提升开发体验
+2. 提升打包构建速度
+3. 减少代码体积
+4. 优化代码运行性能
