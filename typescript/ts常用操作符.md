@@ -46,7 +46,7 @@ interface Person{
     gender? : string // 可选属性
 }
 ```
-必选参数-?
+## 必选参数-?
 ```typescript
 type Required<T>={
     [key in keyof T]-? : T[key] 
