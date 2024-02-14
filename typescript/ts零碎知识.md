@@ -12,6 +12,16 @@ export interface ViewTableProps {
 }
 
 const sb: ViewTableProps["onChange"] = function () { }
+
+type Person = {
+  id: string;
+  name: string;
+  age: number;
+  from?: string;
+  speak?: string;
+};
+//这里的用法类似T[number]
+type A=Person[keyof Person]//string|number
 ```
 - key为number,T[number]
 ```typescript
@@ -26,13 +36,14 @@ type TupleToObject<T extends readonly (string | symbol | number)[]> = {
 ```typescript
 type Length<T extends unknown[]> = T["length"];
 ```
-### 与索引类型签名的区别
+### 索引类型签名
 索引类型签名用于描述对象中可以包含任意属性的方式,例如：
 ```
 type Demo={
     [key:string]:string;
 }
 ```
+**索引签名的键只能是string,number,symbol**
 ## 映射类型
 ts许多内置类型中都使用了映射类型
 ```typescript
@@ -78,4 +89,13 @@ function fn(cb: UnionTest) {
 }
 
 ```
+## 数组类型推断技巧
+```typescript
+type ArrayIncludeTwo<T> = T extends [infer A, infer B, ...infer C]
+	? true
+	: false;
 
+type A = ArrayIncludeTwo<[string]>; //false
+
+type B = ArrayIncludeTwo<[string, number]>; //true
+```
