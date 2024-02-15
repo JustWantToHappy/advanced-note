@@ -7,11 +7,18 @@ hook={
   queue:{
     pending:null
   },
-  //当前hook对应的state(mount时是initState,update之后是是计算之后的state)
+  //传递给hook的初始值，比如useState对应的是intialState，useCallback对应的是intialCallback
   memorizedState:baseState,
   //与下一个hook形成无环列表
   next:null,
 }
+//updat对象保存的相关属性(简化版本)
+const update = {
+  // 更新执行的函数
+  action,
+  // 与同一个Hook的其他更新形成链表
+  next: null,
+};
 ```
 ## updateQueue属性
 - 批量更新，在一次更新操作中，React会遍历updateQueue链表，合并相同类型的更新操作，只执行最新的更新，这样可以提高更新的效率和性能

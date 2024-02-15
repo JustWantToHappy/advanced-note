@@ -106,8 +106,21 @@ type Person = {
   [key in Keys]: string;
 }; // {firstName: string; lastName: string}
 ```
-## extends
-根据条件返回结果，类似三元运算符。
+### extends
+extends是一个**条件类型关键字**，下面的代码可以理解为：**如果T是U的子类型，那么结果为X,否则结果为Y**,
+`extends`的本质：`T1 extends T2`其实就是在判断`T1`能够赋值给`T2`
+```typescript
+T extends U?X:Y
+```
+- 当T是联合类型的时候，叫做分布式条件类型，也就是说当 T 为 "A" | "B" 时， 会拆分成 ("A" extends U ? X : Y) | ("B" extends U ? X : Y)
+- 空的联合类型never:`never`本质上是一个空的联合类型，所以当它赋值给泛型的时候，就会在条件语句中发生分配行为，此时空联合类型自然是无法进行分配的，所以结果就是`never`
+- 当联合类型碰上never:不会触发条件分布
+```typescript
+type IsNever<T> = T extends never ? true : false
+type res=IsNever<never>
+//result:never
+```
+
 ## infer
 ## readonly
 移除readonly
