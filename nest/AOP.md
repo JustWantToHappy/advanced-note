@@ -61,3 +61,6 @@ export class AppService {
 }
 
 ```
+
+## 执行流程
+![Alt text](image-42.png)

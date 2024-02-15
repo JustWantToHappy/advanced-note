@@ -110,6 +110,28 @@ type Person = {
 根据条件返回结果，类似三元运算符。
 ## infer
 ## readonly
+移除readonly
+```typescript
+type Foo = {
+	readonly a: number;
+	readonly b: string;
+	readonly c: boolean;
+};
+
+type Demo<T> = {
+    //-readonly类似与-?
+	-readonly [K in keyof T]: T[K];
+};
+
+/**
+ * {
+ * 	a:number;
+ * 	b:number;
+ * 	c:number
+ * }
+ */
+type A = Demo<Foo>;
+```
 ## keyof
 作用：获取对象或数组等类型的所有键，并返回一个联合类型
 ```typescript
