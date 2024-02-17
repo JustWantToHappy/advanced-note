@@ -17,4 +17,26 @@ rules: [
         use: ['babel-loader'],
       },
 ]
+//如果需要写一些配置，可以写成如下这种形式:
+{
+  test:/.js$/,
+  exclude:/node_modules/,
+  use:[
+    {
+      loader:"babel-loader",
+      options:{
+        //...
+      }
+    }
+  ]
+}
+//如果不想要在webpack配置文件中编写babel相关配置，还可以在根目录下新建一个babel.config.js的配置文件
 ```
+## Core-js
+过去我们使用babel来解决兼容性问题，其中使用@babel/preset-env智能预设来处理兼容性问题，它能够将Es6的一些语法进行编译转换，例如箭头函数，点点点运算符等，但是如果是async 函数，promise对象或者数组的一些方法，它没有办法进行处理
+
+**core-js**
+`core-js`是专门用于做es6以及以上API的`polyfill`
+`npm install core-js`
+- 手动引入：如果我们在某个js文件中使用到了Promise，则我们可以通过`import "core-js/es/prommise"`手动引入的方式解决兼容性问题
+- 自动引入

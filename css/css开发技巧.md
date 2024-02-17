@@ -20,3 +20,25 @@
 html.style.setAttribute("--c1","#fff");
 可以使用一些库提取出图片主要的背景颜色，然后通过这种方式给页面设置背景色(图片调色盘)
 ```
+```html
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		:root {
+			--color: red;
+			--color-secondary: green;
+		}
+	</style>
+</head>
+
+<body>
+	<div style="color:var(--color)" id="app">这是文字</div>
+</body>
+<script>
+	const app = document.querySelector("#app")
+	app.style.color = "var(--color-secondary)"
+</script>
+
+```
