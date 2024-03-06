@@ -7,7 +7,7 @@ const loading = document.querySelector(".loading");
 	const ob = new IntersectionObserver(
 		function (entries) {
 			const entry = entries[0];
-			//isIntersecting为true表示进入，isIntersecting表示离开
+			//isIntersecting为true表示进入
 			if (entry.isIntersecting) {
 				console.info("目标元素进入了，发起请求");
 			}
