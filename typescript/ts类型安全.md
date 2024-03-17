@@ -34,6 +34,9 @@ T extends U? X:Y
 type Diff<T,U>=T extends U?never:T;
 
 let demo:Diff<"a"|"b"|"d","d"|"f">
+对于 Diff<"a", "d" | "f">，因为 "a" 不在 "d" | "f" 中，所以结果为 "a"。
+对于 Diff<"b", "d" | "f">，因为 "b" 不在 "d" | "f" 中，所以结果为 "b"。
+对于 Diff<"d", "d" | "f">，因为 "d" 在 "d" | "f" 中，所以结果为 never
 //result:"a"|"b"
 ```
 ## 协变和逆变
