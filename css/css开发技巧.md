@@ -42,3 +42,46 @@ html.style.setAttribute("--c1","#fff");
 </script>
 
 ```
+
+## 使用js实现高度的自动过渡效果
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.container {
+			width: 100px;
+			background-color: red;
+			color: white;
+			word-break: break-word;
+			transition: all linear 0.3s;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container"></div>
+	<button style="margin-top: 100px;">toggle</button>
+
+</body>
+<script>
+	const container = document.querySelector('.container');
+	const button = document.querySelector('button');
+	button.addEventListener('click', () => {
+		container.textContent = "这是一段文字，这段文字的长度超过了容器的宽度，所以会自动换行。"
+		container.style.height = "auto"
+		const height = container.offsetHeight;
+		container.style.height = '0px'
+		const textContent = container.textContent;
+		requestAnimationFrame(() => {
+			container.style.height = `${height}px`
+		})
+	});
+</script>
+
+</html>
+```
