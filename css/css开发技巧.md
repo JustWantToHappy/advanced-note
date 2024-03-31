@@ -85,3 +85,19 @@ html.style.setAttribute("--c1","#fff");
 
 </html>
 ```
+
+## 水平垂直居中的另一种思路(flex+margin:auto)
+```html
+<style>
+	.father{
+		display:flex;
+		width:400px;
+		height:400px;
+	}
+	.son{
+		width:50px;
+		height:50px;
+		margin:auto;//水平垂直居中实现
+	}
+</style>
+```
