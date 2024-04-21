@@ -17,3 +17,12 @@ function App() {
 	);
 }
 ```
+## 返回一个数组
+```tsx
+const Demo = () => {
+	return [<div>1</div>, <div>2</div>];
+};
+```
+```tsx
+const App=()=><Demo/>
+```
