@@ -1,0 +1,32 @@
+## css中的百分比
+- 相对于父元素的宽度
+    - max-width
+    - min-width
+    - width
+    - left
+    - right
+    - text-indent    
+    - padding(包括padding-left,padding-top,paddidng-bottom,padding-bottom)
+    - margin
+    - grid-template-columns
+    - grid-auto-columns
+    - column-gap等
+- 相对于父级高度：
+    - max-height
+    - min-height
+    - height
+    - top
+    - bottom
+    - grid-template-rows
+    - grid-auto-rows
+    - row-gap等
+- 相对于主轴长度：
+    - flex-basis等
+- 相对于继承字号：
+    - font-size等
+- 相对于自身字号：
+    - line-height等
+- 特殊算法：
+    - background-position:(方向长度/该方向上除了背景图之外的部分总长度)
+    - border-image-slice(相对于图片尺寸)
+    - filter系列函数
