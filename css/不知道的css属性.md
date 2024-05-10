@@ -178,3 +178,14 @@ text-shadow: 1px 1px 2px pink;
 /* 插页 (阴影向内) | x 偏移量 | y 偏移量 | 阴影颜色 */
 box-shadow: inset 5em 1em gold;
 ```
+
+## aspect-ratio
+aspect-ratio CSS 媒体属性 可以用来测试 viewport 的宽高比。也可以用来设置图片的宽高比
+```css
+/* 最小宽高比 */
+@media (min-aspect-ratio: 8/5) {
+  div {
+    background: #9af; /* blue */
+  }
+}
+```
