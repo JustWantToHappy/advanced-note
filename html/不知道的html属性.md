@@ -55,7 +55,7 @@
 ![alt text](image.png)
 
 ## tranlate
-用translate可以指定某个元素的内容是否应该触翻译
+用translate可以指定某个元素的内容是否应该翻译
 ```html
 <!--开启翻译-->
 <div translate="yes">
@@ -66,3 +66,7 @@ how old are you?
     how old are you?
 </div>
 ```
+
+## autocompelete属性
+有时候我们会发现浏览器会自动给我们表单内容的填充提示，比如：
+![alt text](image-1.png)
