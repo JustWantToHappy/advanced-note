@@ -26,3 +26,6 @@ const Demo = () => {
 ```tsx
 const App=()=><Demo/>
 ```
+
+## React中的空节点
+null、undefined以及布尔值都是空节点
