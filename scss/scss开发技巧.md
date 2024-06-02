@@ -13,3 +13,22 @@
 }
 ```
 - webpack:好像要下载(sass-resources-loader)，然后配置一下webpack
+
+
+## mixin中的插槽
+@content;
+```scss
+.flex($justifiyContent,$alignItems){
+	display:flex;
+	justify-content:$justifyContent;
+	align-items:$alignItems;
+	@content;
+}
+
+.header{
+	@include flex(center,center){
+		width:100%;
+		height:100%;
+	}
+}
+```
