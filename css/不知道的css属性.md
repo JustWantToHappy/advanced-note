@@ -40,52 +40,6 @@
     }
 </style>
 ```
-
-## css容器查询
-```html
-<style>
-    .post {
-  container-type: inline-size;
-  container-name: sidebar;
-}
-@container sidebar (min-width: 700px) {
-  .card {
-    font-size: 2em;
-  }
-}
-</style>
-```
-## 媒体查询
-```html
-<style>
-/*表示当屏幕小于640px的时候*/
-@media not all and (min-width: 640px) { ... }
-/*表示当屏幕大于等于640px的时候,两种写法*/
-@media (min-width: 640px) { ... }
-@media screen and (min-width:640px){...}
-/*当暗黑模式下可以在这里面设置css变量的值用于切换主题*/
-@media (prefers-color-scheme: dark){}
-</style>
-```
-## attr()函数
-```html
-<style>
-    width:attr(data-width);
-    </style>
-<html>
-    <div data-width="100px"></div>
-</html>
-```
-
-## env函数
-用于获取环境变量的值
-```html
-    <style>
-        div {
-           width: env(safe-area-inset-left);
-        }
-    </style>
-```
 ## intial
 作用：用于设置默认值，如果某个css属性的默认值不清楚，则通过inital可以设置：
 > line-height:intital;
@@ -130,14 +84,6 @@ animation-direction CSS 属性设置动画是应正向播放、反向播放还�
 - 值可以是ease,linear,ease-in-out,ease-in
 - 值可以是steps函数
 - 值可以是贝塞尔函数
-## clamp函数
-`clamp()`函数的作用是把一个值限制在一个上限和下限之间，当这个值超过最小值和最大值的范围时，在最小值和最大值之间选择一个值使用。它接收三个参数：最小值、首选值、最大值。
-```scss
-font-size: clamp(1rem, 2.5vw, 2rem);
-```
-- 当2.5vw大于2rem的时候，使用2rem
-- 当2.5vw小于1rem的时候，使用1rem
-- 其他使用2.5vw
 
 ## white-space
 white-space 属性用于设置如何处理元素内的空白字符。
