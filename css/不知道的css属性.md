@@ -135,3 +135,25 @@ aspect-ratio CSS 媒体属性 可以用来测试 viewport 的宽高比。也可�
   }
 }
 ```
+## clip-path：裁剪
+- clip-path: circle(50%);裁剪效果为圆
+- clip-path:polygon(x0 y0,x1 y1,...,xn yn);裁剪成为多边形
+- clip-path:path()，可以使用svg图形的path属性
+还有椭圆等函数
+
+## perspective透视效果
+```jsx
+const StyleDiv = styled("div")`
+	width: 500px;
+	height: 500px;
+	border: 1px solid red;
+	perspective: 500px;
+	.shape {
+		width: 500px;
+		height: 500px;
+		background-color: blueviolet;
+		transform: rotateX(45deg);
+	}
+`;
+
+```
