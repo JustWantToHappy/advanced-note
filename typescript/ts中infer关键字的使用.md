@@ -78,3 +78,4 @@ function sum(a: number,b:number) {
 
 const a = curry(sum); //(params:number)=>(params:number)=>string;
 ```
+>tips: infer关键字只能在extends的子句中才可以使用，也就是extends的右边

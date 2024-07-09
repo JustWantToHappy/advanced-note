@@ -15,3 +15,4 @@ const b=a?.name;//报错
 ...
 ## void
 其实可以理解为null和undefined的联合类型
+> tips: any和unknow是任何类型的超类型
