@@ -115,6 +115,8 @@ T extends U?X:Y
 - 当T是联合类型的时候，叫做分布式条件类型，也就是说当 T 为 "A" | "B" 时， 会拆分成 ("A" extends U ? X : Y) | ("B" extends U ? X : Y)
 - 空的联合类型never:`never`本质上是一个空的联合类型，所以当它赋值给泛型的时候，就会在条件语句中发生分配行为，此时空联合类型自然是无法进行分配的，所以结果就是`never`
 - 当联合类型碰上never:不会触发条件分布
+- 联合类型作为泛型的时候 extends 会触发分发执行，普通的联合类型计算不会触发，例如`string|number extends number?true:false`
+
 ```typescript
 type IsNever<T> = T extends never ? true : false
 type res=IsNever<never>
