@@ -42,3 +42,5 @@ position:fixed不一定就是相对窗口进行定位的，如果祖先元素开
 }
 </style>
 ```
+## flex布局下省略号不生效
+参考如下文章：https://juejin.cn/post/6885949601170325511

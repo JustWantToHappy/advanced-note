@@ -101,3 +101,13 @@ html.style.setAttribute("--c1","#fff");
 	}
 </style>
 ```
+
+## 省略
+### 单行省略
+```css
+.omit{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+```
