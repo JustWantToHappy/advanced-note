@@ -111,3 +111,16 @@ html.style.setAttribute("--c1","#fff");
 	white-space: nowrap;
 }
 ```
+### 多行省略
+```css
+.omit{
+	display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+}
+```
