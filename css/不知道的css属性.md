@@ -157,3 +157,31 @@ const StyleDiv = styled("div")`
 `;
 
 ```
+
+## border-image
+border-image CSS 属性在给定元素的周围绘制图像，取代元素的常规边框。
+```css
+	.container {
+			border-image: linear-gradient(red, blue) 27 / 10px;
+			width: 100px;
+			height: 100px;
+			background-color: red;
+		}
+```
+
+## background-clip
+background-clip 设置元素的背景（背景图片或颜色）是否延伸到边框、内边距盒子、内容盒子下面。
+```css
+.container {
+			width: 100px;
+			height: 100px;
+			background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+			color: transparent;
+			background-clip: text;
+		}
+```
+```html
+<div class="container">
+		123s24325353452346234322535
+	</div>
+```
