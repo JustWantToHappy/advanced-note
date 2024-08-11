@@ -99,3 +99,24 @@ type A = ArrayIncludeTwo<[string]>; //false
 
 type B = ArrayIncludeTwo<[string, number]>; //true
 ```
+## 几个小技巧
+- 基本上任何类型与any的交集都是any
+```typescript
+type A=any&1;//any
+type B={}&any;//any
+type C=never&any;//never;例外
+```
+
+- extends {}
+```typescript
+//以下结果都是true
+type A = "" extends {} ? true : false;
+
+type B = 1 extends {} ? true : false;
+
+type C = string extends {} ? true : false;
+
+type D = { name: string } extends {} ? true : false;
+```
+
+
