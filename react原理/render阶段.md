@@ -50,3 +50,13 @@ completeWork的工作内容：负责处理Fiber节点到DOM节点的映射逻辑
 副作用链可以理解为render阶段"工作成果"的一个集合
 - Fiber节点的effectList里面记录的是其需要更新的后代节点(对应completeUnitOfWork的第二点，这样当所有的节点都执行完毕completeWork工作之后，则rootFiber节点的effectList中就含有所有副作用的节点了)
 - Fiber节点的effectList里面记录的是有副作用的节点
+
+## 优先级调度
+### 时间戳
+- react的调度时间本质上是一个“过期时间戳”，用来决定不同更新任务的优先级和调度顺序
+    - 每个更新（如 setState、props 变化）都会被分配一个 expirationTime
+    - expirationTime 越大，优先级越高（同步任务最大）
+- 如果是同步任务，比如事件处理，生命周期，expirationTime 取最大值（Sync）
+- 如果是异步任务，比如setTimeout，数据请求，expirationTime 会比 currentTime 小一些，表示可以延后处理。
+
+> TODO: 时间调度&时间分桶算法
