@@ -1,5 +1,27 @@
 ## 渲染流水线
 ![Alt text](image-14.png)
+## render过程中的异常处理和恢复机制
+在react渲染Fiber树的时候如果遇到了异常有机会重试或者降级，而不是直接导致整个应用崩溃，比如ErrorBoundary、Suspense等机制实现
+```javascript
+do{
+    try{
+        workLoop(isYieldy);
+    }catch(err){
+        //重置hooks,context等
+        resetHooks();
+         if (nextUnitOfWork === null) {
+            //...
+         }else{
+            if(符合某些条件){
+                nextUnitOfWork = completeUnitOfWork(sourceFiber);
+                //通过continue继续workLoop
+                continue;
+            }
+         }
+    }
+    break;
+}while(true);
+```
 ## performaceUnitOfWork方法
 通过循环调用performUnitOfWork方法来触发beginWork方法，新的Fiber节点就会不断被创建
 ```javascript
