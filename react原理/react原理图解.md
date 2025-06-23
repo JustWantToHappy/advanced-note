@@ -120,3 +120,7 @@ class App extends React.Component<any, IState> {
 
 #### componentWillUpdate,componentDidUpdate
 这两个生命周期中不能够调用setState，因为在这里面调用setState容易造成死循环。导致程序崩溃。
+
+## 好文推荐
+结合此文章食用效果更佳
+https://juejin.cn/post/6944863057000529933?searchId=20250623215908B33E2D7A4E297C1E3F0B#heading-8
