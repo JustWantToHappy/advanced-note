@@ -1,3 +1,5 @@
+## setState和Component模式的setState的一些不同点
+- setState通过调用lastRenderedReducer获取最新的state,和上一次的currentState，进行浅比较，如果相等，那么就退出，不重新渲染，而Component模式的setState会重新渲染
 ## 为什么setState要设计成为异步的、批量更新的?
 这是因为每次执行setState都会触发渲染，执行一遍re-render,而re-render的流程是：
 > setState=>shouldComponentUpdate=>componentWillUpdate=>render=>componentDidUpdate
