@@ -20,7 +20,7 @@ const update = {
   next: null,
 };
 ```
-需要区分hook对象的memoizedState和fiber的memoizedState属性，前者主要记录hook对象的值(如state,callback或者是依赖项等)，后者存储的是hook对象链表
+需要区分hook对象的memoizedState和fiber的memoizedState属性，前者主要记录hook对象的信息(如state,callback或者是依赖项等)，后者存储的是hook对象链表
 ## updateQueue属性
 - 批量更新，在一次更新操作中，React会遍历updateQueue链表，合并相同类型的更新操作，只执行最新的更新，这样可以提高更新的效率和性能
 - 异步更新：当组件处于concurrent模式下的时候，React可以根据更新的优先级和时间片来进行适当的渲染工作
