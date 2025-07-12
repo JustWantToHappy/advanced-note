@@ -109,7 +109,62 @@ queue.pending = {
 // 这样在处理完高优先级更新后
 // React可以回来继续处理这些低优先级更新
 ```
+## renderWithHooks函数
+> 主要入参有current和workInProgress，是执行function component的主要函数
+执行function component:
+```javascript
+ var children = Component(props, refOrContext);
+```
+一般情况下，FC只会执行一次，但是在函数式组件渲染过程中触发了新的更新，会多次渲染function component,例如：
+```jsx
+function MyComponent() {
+  const [count, setCount] = useState(0);
+  if (count < 1) {
+    setCount(1); // 这里会触发 didScheduleRenderPhaseUpdate = true
+  }
+  return <div>{count}</div>;
+}
+```
+导致如下结果
+```javascript
+  if (didScheduleRenderPhaseUpdate) {
+    do {
+      //...
+      children = Component(props, refOrContext);
+    } while (didScheduleRenderPhaseUpdate);
+```
+## dispatchAction函数
+我们知道useState返回的第二个参数实际上就是dispatchAction.bind函数，那这个函数中主要干啥了？
+<br>
+
+1. 如果是render阶段导致的更新，如：
+
+```jsx
+function MyComponent() {
+  const [count, setCount] = useState(0);
+  if (count < 1) {
+    setCount(1); // 这里会触发 didScheduleRenderPhaseUpdate = true
+  }
+  return <div>{count}</div>;
+}
+```
+那就会进入如下逻辑：
+
+```javascript
+if (fiber === currentlyRenderingFiber$1 || alternate !== null && alternate === currentlyRenderingFiber$1){
+  didScheduleRenderPhaseUpdate = true;//和之前讲的renderWithHooks中的对应上来，会导致renderWithHooks过程中，多次函数组件的执行
+  //创建一个update对象，将本次action存到update对象中，将
+  //等待本次渲染完成
+}
+```
+
+2. 如果在“渲染阶段之外”调用（如事件、effect、生命周期等）
+  - 也会创建update对象，将update对象加入到hook.queue链表中
+  - 发起调度：`scheduleWork(fiber, _expirationTime)`
+
 ## useState图解
 > hook的共同点
 1. 每个hook初始化都会创建一个hook对象
 2. 根据执行时机，区分mountXXX和updateXXX
+<br>
+https://www.yuque.com/clannadafterstory/wkbgyg/ea8om5xgydci5ykm
