@@ -48,6 +48,10 @@ origin是远程主机，master表示是远程服务器上的master分支和本�
 **多人合并开发时**
 先切换到主分支master上，为了保证不会错过别人推送到master分支上的改动，要先pull一下master分支，然后将自己的分支dev-xx合并到master分支上。
 - git rebase 分支名称
+
+**已经执行了git merge，如何中断这次merge?**
+- git merge --abort
+
 ## 不小心commit或者不小心push了怎么办
 1. git reset --soft HEAD~1(这个数字1可以替换成其他数字，2,3,4...)(除了加上数字还可以加上commit id)
 2 git reset HEAD~1(这个数字1可以替换成其他数字，2,3,4...)(除了加上数字还可以加上commit id)
