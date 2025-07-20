@@ -35,3 +35,19 @@
 > 这个想法是，如果我们有许多以类似方式处理的元素，那么就不必为每个元素分配一个处理程序 —— 而是将单个处理程序放在它们的共同祖先上。
 
 关于事件委托的case可以参考：https://zh.javascript.info/event-delegation
+
+## dom.dispatchEvent派发事件
+```javascript
+
+const btn = document.getElementById("btn");
+
+// 添加事件监听
+btn.addEventListener("click", () => {
+  console.log("按钮被点击了");
+});
+
+// 派发 click 事件（模拟点击）
+btn.dispatchEvent(new MouseEvent("click"));
+
+// 控制台输出：按钮被点击了
+```
