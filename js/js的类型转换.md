@@ -1,8 +1,3 @@
-## ToPrimitive操作
-1. 如果obj是基本类型，直接返回
-2. 否则，调用valueOf方法，如果得到原始值，则返回
-3. 否则，调用toString方法，如果得到原始值，则返回
-4. 否则，报错
 ## 类型转换
 JS没有严格的数据类型，所以可以互相转换
 - 显示类型转换：`Number()`,`String()`,`Boolean()`
@@ -56,6 +51,10 @@ console.log(String({b:1})) // "[object Object]"
 - NaN
 以上统一转换为false，其他一律为true
 ### 隐式转换
+JavaScript 引擎在需要的情况下，自动将一个类型的值转换成另一个类型，以满足表达式或操作符的要求。这种转换是 自动发生 的，不需要开发者显式地调用转换函数。
+<br>
+而隐式类型转换通常发生在算术运算符、关系运算符，相等符号==,逻辑运算符if、!、&&、||等
+
 ```javascript
 // 四则运算  如把String隐式转换成Number
 console.log(+'1' === 1) // true
@@ -106,3 +105,9 @@ const a={
 }
 console.info(a==1&&a==2&&a==3)//true
 ```
+
+## ToPrimitive操作
+1. 如果obj是基本类型，直接返回
+2. 否则，调用valueOf方法，如果得到原始值，则返回
+3. 否则，调用toString方法，如果得到原始值，则返回
+4. 否则，报错
