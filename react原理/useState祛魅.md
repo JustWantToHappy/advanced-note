@@ -162,6 +162,48 @@ if (fiber === currentlyRenderingFiber$1 || alternate !== null && alternate === c
   - 也会创建update对象，将update对象加入到hook.queue链表中
   - 发起调度：`scheduleWork(fiber, _expirationTime)`
 
+
+## 双缓存架构下的hook链表
+```javascript
+var firstCurrentHook = null;
+var currentHook = null;
+var nextCurrentHook = null;
+var firstWorkInProgressHook = null;
+var workInProgressHook = null;
+var nextWorkInProgressHook = null;
+```
+拿update阶段的时候useState中对应的updateReducer获取hook对象举例：
+
+```javascript
+function updateWorkInProgressHook() {
+  if (nextWorkInProgressHook !== null) {
+    // 已有新链表，复用
+    workInProgressHook = nextWorkInProgressHook;
+    nextWorkInProgressHook = workInProgressHook.next;
+    currentHook = nextCurrentHook;
+    nextCurrentHook = currentHook !== null ? currentHook.next : null;
+  } else {
+    // 克隆旧节点，生成新节点
+    currentHook = nextCurrentHook;
+    var newHook = {
+      memoizedState: currentHook.memoizedState,
+      baseState: currentHook.baseState,
+      queue: currentHook.queue,
+      baseUpdate: currentHook.baseUpdate,
+      next: null
+    };
+    if (workInProgressHook === null) {
+      workInProgressHook = firstWorkInProgressHook = newHook;
+    } else {
+      workInProgressHook = workInProgressHook.next = newHook;
+    }
+    nextCurrentHook = currentHook.next;
+  }
+  return workInProgressHook;
+}
+```
+
+
 ## useState图解
 > hook的共同点
 1. 每个hook初始化都会创建一个hook对象
