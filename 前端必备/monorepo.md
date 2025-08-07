@@ -26,6 +26,21 @@ Monorepo是管理项目代码的一种方式，指在一个项目仓库中管理
 - 功能，版本之间存在强关联
 - 项目中存在多个编译入口，且构建条件存在差异
 ## 方案
-
 - yarn+lerna
 - pnpm(体验最佳?)
+
+## pacakge.json相关配置
+- workspaces配置
+```json
+{
+    "workspaces": [
+        "docs",
+        "packages/**"
+    ],
+}
+
+```
+
+1. 当 package.json 文件中定义 workspaces 时，当前所在目录会被当作 project root。默认情况下 project root 不安装依赖包，在根目录下执行yarn add packageName会报错，如需在根目录安装则需用 yarn add packageName -W
+2. 将 workspaces 数组中的子包建立一个虚拟的link包，在root project中可以当作正常安装的依赖包直接import子包 import * as pA from packageA | import pA from packageA
+
