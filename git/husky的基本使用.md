@@ -21,3 +21,6 @@ npx husky-init(自动配置husky)
 yarn add --save-dev husky(安装husky)
 ```
 
+## 其他工具
+- lint-staged：只对暂存区（staged）的文件运行指定的代码检查和格式化命令（lint 和 prettier 等），避免每次提交时对整个项目文件都运行检查，提高效率
+- commitlint：是一个 git commit 信息校验工具，校验你的commit msg是否符合规范
