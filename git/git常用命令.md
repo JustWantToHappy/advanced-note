@@ -54,9 +54,10 @@ origin是远程主机，master表示是远程服务器上的master分支和本�
 
 ## 不小心commit或者不小心push了怎么办
 1. git reset --soft HEAD~1(这个数字1可以替换成其他数字，2,3,4...)(除了加上数字还可以加上commit id)
-2 git reset HEAD~1(这个数字1可以替换成其他数字，2,3,4...)(除了加上数字还可以加上commit id)
+2. git reset HEAD~1(这个数字1可以替换成其他数字，2,3,4...)(除了加上数字还可以加上commit id)
 区别：加了--soft回到到保留更改且留在暂存区，而没有加的其实是--mixed的简写形式，它会回退到工作区
 **还有加上--hard的用法：谨慎使用，比如你回退到上上个版本的commit id，那你上一个版本的代码丢失**
+3. git reset --soft origin/master: 用来查看当前分支和远程分支的区别
 
 ## 如果遇到git命令进程崩溃怎么办
 删除.git目录下的index.lock文件
