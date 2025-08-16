@@ -1,3 +1,8 @@
+## 每个hook共同逻辑
+1. 每个hook初始化都会创建一个hook对象
+2. 根据执行时机，区分mountXXX和updateXXX(如何区分走的是mountXXX还是updateXXX？根据current树上的memoizedState是否有当前hook对象判断，如果没值，则走mountXXX，相应的也会走到mountInProgressHook，创建一个新的hook对象,否则走updateInProgressHook)
+<br>
+
 ## 为什么函数式组件需要需要hooks
 1. 类式组件中this指向问题，同时类式组件的生命周期需要学习成本
 2. 复用状态逻辑，靠的是HOC和Render Props这些组件设计模式，但是这些设计模式并非是万能的，它们在实现逻辑复用的同时，也破坏这组件的结构，其中最常见的一个问题就是"嵌套地狱"现象，hooks使状态逻辑复用变得简单可行。

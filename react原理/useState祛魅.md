@@ -205,8 +205,4 @@ function updateWorkInProgressHook() {
 
 
 ## useState图解
-> hook的共同点
-1. 每个hook初始化都会创建一个hook对象
-2. 根据执行时机，区分mountXXX和updateXXX(如何区分走的是mountXXX还是updateXXX？根据current树上的memoizedState是否有当前hook对象判断，如果没值，则走mountXXX，相应的也会走到mountInProgressHook，创建一个新的hook对象,否则走updateInProgressHook)
-<br>
-https://www.yuque.com/clannadafterstory/wkbgyg/ea8om5xgydci5ykm
+http://yuque.com/clannadafterstory/wkbgyg/ea8om5xgydci5ykm#vuWZQ

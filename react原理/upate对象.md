@@ -1,5 +1,5 @@
 ## 思考
-挂载可以理解为一种特殊的更新，ReactDOM.render和setStat也是一种触发更新的姿势
+挂载可以理解为一种特殊的更新，ReactDOM.render和setState也是一种触发更新的姿势
 ## update的创建
 1. dispatchAction(创建update)
 2. scheduleUpdateOnFiber(调度update)
