@@ -29,3 +29,29 @@ btn.onclick=function(){
 ```
 ### 如何解决动态集合问题?
 h5中新增的API:documet.querySelectorAll()方法获取静态集合
+
+## 错误创建数组方式
+```javascript
+const arr = new Array(100).fill([]);
+arr[0].push(1);
+console.log(arr);//100个[1]
+```
+这样会导致所有数组元素都引用同一个对象地址，所以修改arr[0],其中就是修改同一个对象的属性，而arr[0]=1不会影响其他元素的原因是，将arr[0]的引用地址直接改成值了
+
+## try-catch坑
+- try-catch不能够捕获异步错误，例如:
+```javascript
+function asyncOperation() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        throw new Error("Error inside promise");
+      } catch (err) {
+        // This won't be reached
+        console.error("Caught error inside promise:", err); 
+      }
+      resolve("Success");
+    }, 1000);
+  });
+}
+```
