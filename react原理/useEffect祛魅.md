@@ -22,3 +22,13 @@ useEffect(()=>{
 
 ## useEffect图解
 https://www.yuque.com/clannadafterstory/wkbgyg/ea8om5xgydci5ykm#cdY0P
+
+## 副作用执行
+副作用的执行是在commit阶段，在执行副作用队列之前，react会将执行动作包装成一个异步任务，在不同环境下，react会通过不同方式实现异步功能，浏览器环境下优先使用MessageChannel(postMessage),如果没有就是用setTimeout，在polyfill或者测试环境下，甚至会用 fakeNode等技术
+
+
+为什么优先使用MessageChannel(postMessage)?
+1. 这种方式比setTimeout更快
+2. 不会被浏览器throttle,页面在后台，或者标签页未激活的情况下，会降低定时器触发频率甚至暂停
+
+> fakeNode:是一种 hack 技术，用于在没有 MessageChannel 的环境下模拟异步调度。比如创建一个 DOM 节点，监听它的事件，触发事件来模拟异步回调。

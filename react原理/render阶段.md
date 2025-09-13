@@ -1,5 +1,9 @@
 ## 渲染流水线
 ![Alt text](image-14.png)
+
+## 渲染的入口
+![alt text](image-21.png)
+
 ## render过程中的异常处理和恢复机制
 在react渲染Fiber树的时候如果遇到了异常有机会重试或者降级，而不是直接导致整个应用崩溃，比如ErrorBoundary、Suspense等机制实现
 ```javascript
@@ -21,7 +25,12 @@ do{
     }
     break;
 }while(true);
+
 ```
+
+> isYieldy表示的是否启用"可让出"模式，如果 isYieldy 为 true，表示当前渲染可以被中断，让出主线程（通常用于 Concurrent Mode，React 可能会暂停渲染，等待更高优先级任务）。
+如果 isYieldy 为 false，表示当前渲染是同步的，不会让出主线程，必须一次性完成（即传统的同步渲染）。
+
 ## performaceUnitOfWork方法
 通过循环调用performUnitOfWork方法来触发beginWork方法，新的Fiber节点就会不断被创建
 ```javascript
@@ -62,7 +71,7 @@ completeWork的工作内容：负责处理Fiber节点到DOM节点的映射逻辑
 - 将当前节点的副作用链插入到其父节点对应的副作用链中
 - 以当前节点为起点，循环遍历其兄弟节点以及其父节点
 ## beginWork和completeWork调用顺序问题
-- 对于一个Fiber节点，首先beginWor k
+- 对于一个Fiber节点，首先beginWork
 - 判断这个节点是否有Child：
     - 如果有child节点则进入到child节点的beginWork阶段
     - 如果没有,则判断是否有当前节点的sibling节点：
