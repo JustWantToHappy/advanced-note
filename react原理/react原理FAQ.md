@@ -37,3 +37,6 @@ import React from 'react'
 React.createElement('div',{className:'text'},'text')
 ```
 
+- 为啥react通过fakeNode触发事件的形式执行一些操作
+1. 方便统一调度入口，插入一些公共逻辑
+2. 在开发环境下捕获用户代码（组件 render、生命周期、事件回调等）里抛出的异常（有些浏览器在try-catch之后，window.onerror不能监听到错误，而使用fakeNode自定义事件派发的方式，可以监听到事件）
