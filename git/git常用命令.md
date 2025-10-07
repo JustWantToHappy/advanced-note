@@ -45,8 +45,6 @@ origin是远程主机，master表示是远程服务器上的master分支和本�
 
 ## 合并分支
 - git merge origin/远程分支名称
-**多人合并开发时**
-先切换到主分支master上，为了保证不会错过别人推送到master分支上的改动，要先pull一下master分支，然后将自己的分支dev-xx合并到master分支上。
 - git rebase 分支名称
 
 **已经执行了git merge，如何中断这次merge?**
