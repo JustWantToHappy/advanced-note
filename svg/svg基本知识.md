@@ -46,7 +46,7 @@ SVG中的viewBox属性定义了SVG内部的坐标系统和可见区域，它是�
 ## 绘制不规则图形的方案
 1. path
 
-二次贝塞尔曲线
+二次贝塞尔曲线,使用绘制命令Q
 ```html
 <svg width="300" height="150" style={{ background: "#f8f8f8" }}>
 			<path
@@ -160,3 +160,23 @@ svg中特殊的css属性
 }
 
 ```
+
+## 如何使用svg绘制圆弧
+使用A命令绘制圆弧，A指令有几个参数：rx(圆弧x轴的半径),ry（圆弧y轴的半径）,rotation(圆弧旋转的度数，值为0~360),large-arc-flag(大弧标记,值为0或1，0画的是小圆弧，1画大圆弧)，sweep-flag(反向画弧，值为0或1，从开始点到结束点是在下面画还是上面画),x(结束点的横坐标),y（结束点的纵坐标）
+```html
+<svg
+  width="200"
+  height="200"
+  viewBox="-100 -100 200 200"
+>
+  <path
+    d="
+      M -40 -40
+      A 70 70 0 0 0 40 40"
+    fill="none"
+    stroke="red"
+    stroke-width="5"
+  />
+</svg>
+```
+![alt text](image.png)
