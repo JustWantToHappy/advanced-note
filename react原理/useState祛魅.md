@@ -13,6 +13,7 @@
 - setState无论是同步还是异步的，要看是否命中batchUpdate机制
 - 哪些不能够命中batchUpate机制?
     - setTimeout、setInterval
+    - Promise
     - 自定义的DOM事件
     - 总之就是React"管不到"的入口
 ```tsx
@@ -27,6 +28,39 @@
 
     // 结束 isBatchingUpdates = false
   }
+```
+
+举个简单的例子命中批量更新的case
+```tsx
+
+export function Child(){
+	const [count,setCount] = React.useState(0);
+
+//点击一下按钮轴，共打印一次
+	console.log(count,'hhh');
+	
+	return <button onClick={()=>{
+    //命中batchingUpdate，多次setState合并成一次
+			setCount(count=>count+1);
+			setCount(count=>count+1);
+	}}>count{count}</button>
+}
+
+
+export function Child(){
+	const [count,setCount] = React.useState(0);
+
+  //点击一次按钮之后，共打印两次
+	console.log(count,'hhh');
+	
+	return <button onClick={()=>{
+    //没命中batchingUpdate，每次setState算一次更新
+		setTimeout(() => {
+	    setCount(count=>count+1);
+			setCount(count=>count+1);
+		}, 0);
+	}}>count{count}</button>
+}
 ```
 ## useState对应的hook对象结构
 ```javascript
