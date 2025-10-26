@@ -75,6 +75,7 @@ console.log(JSON.parse("{a:1}")) // {a:1}
     1. 如果类型是Undefined或者Null,返回true
     ```javascript
     null==null//true
+    null==undefined//true
     ```
     2. 如果一个是+0，另一个是-0，返回true
     3. 如果类型都是对象，二者引用的是同一个对象，返回true,反之返回false
