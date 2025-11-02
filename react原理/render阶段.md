@@ -61,6 +61,61 @@ function workLoopSync(){
 ![Alt text](image-13.png)
 ## completeWork
 completeWork的工作内容：负责处理Fiber节点到DOM节点的映射逻辑。
+
+## beginWork和completeWork执行顺序
+假设有如下组件结构：
+```tsx
+<App>
+  <A>
+    <B />
+  </A>
+  <C />
+</App>
+
+```
+则对应的执行顺序为：
+```
+beginWork(App)
+  → beginWork(A)
+    → beginWork(B)
+      → completeUnitOfWork(B)
+    → completeUnitOfWork(A)
+  → beginWork(C)
+    → completeUnitOfWork(C)
+  → completeUnitOfWork(App)
+
+```
+实际上completeUnitOfWork方法并不是通过递归实现的，而是循环：
+
+```javascript
+function completeUnitOfWork(workInProgress){
+    while(true){
+        //如果当前Fiber正常完成
+        if(if ((workInProgress.effectTag & Incomplete) === NoEffect)){
+            // 调用 completeWork，构建 DOM 或标记 effect
+             nextUnitOfWork = completeWork(current, workInProgress, nextRenderExpirationTime);
+             //把当前 fiber 的副作用合并到父 fiber 上
+             if(returnFiber!==null){
+                //...
+             }
+
+              // 4. 如果有兄弟节点，去处理兄弟；否则回到父节点
+            if (siblingFiber !== null) {
+                return siblingFiber;
+            } else if (returnFiber !== null) {
+                workInProgress = returnFiber;
+                continue; // 继续向上归
+            } else {
+                // 根节点完成
+                return null;
+            }
+        }else{
+            //如果 fiber 出错，进入 unwindWork 处理错误边界
+            //...
+        }
+    }
+}
+```
 ### completeWork内部有3个关键动作
 - 创建DOM节点
 - 将DOM节点插入到DOM树中
