@@ -76,3 +76,26 @@ const P = ({ children }) => {
 </P>
 
 ```
+## 组件的key
+```jsx
+function ListItem(props) {
+  //console.log(props.key);打印结果为undefined
+  // 正确！这里不需要指定 key：
+  return <li>{props.value}</li>;
+}
+
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    // 正确！key 应该在数组的上下文中被指定
+    <ListItem key={number.toString()} value={number} />
+  );
+  return (
+    <ul>
+      {listItems}
+    </ul>
+  );
+}
+```
+
+注意，给组件设置过key之后，其下子元素无需再设置
