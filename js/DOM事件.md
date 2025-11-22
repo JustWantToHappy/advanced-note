@@ -51,3 +51,35 @@ btn.dispatchEvent(new MouseEvent("click"));
 
 // 控制台输出：按钮被点击了
 ```
+## Event事件对象继承结构图
+
+```text
+Event（基础事件）
+    │
+    ├── AnimationEvent
+    ├── ClipboardEvent
+    ├── CompositionEvent
+    ├── CustomEvent
+    ├── FocusEvent
+    ├── InputEvent
+    ├── UIEvent（用户界面事件）
+    │       │
+    │       ├── MouseEvent（鼠标事件）
+    │       │       ├── PointerEvent
+    │       │       ├── WheelEvent
+    │       │       └── DragEvent
+    │       │
+    │       ├── KeyboardEvent（键盘事件）
+    │       └── TouchEvent（移动端触摸）
+    │
+    └── ProgressEvent（包括 XMLHttpRequest 事件）
+
+```
+
+## DOM节点继承结构图
+![alt text](957FBB2E-2056-404B-8768-766825C3FCB3.png)
+之所以最底层叫做EventTarget，是因为只要是继承EventTarget的对象都可以监听和派发事件，和事件对象继承保持独立
+
+## drag事件
+- 被拖动的元素(draggable)，只触发dragStart,drag,dragEnd事件
+- 放置目标（如容器）只触发dragenter,dragover,dragleave,drop事件
