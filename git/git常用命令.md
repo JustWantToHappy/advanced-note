@@ -6,8 +6,9 @@ git pull = git fetch + git merge(从安全性角度出发，应该选择后者)�
 - git config user.email  查看邮箱
 
 ## git仓库相关
+- git remote -v: 查看远程配置
 - git remote remove origin(移除仓库)
-- git remote add origin 仓库地址(绑定远程仓库,注意可以绑定多个远程仓库)
+- git remote add origin 仓库地址(绑定远程仓库,注意可以绑定多个远程仓库),这个命令的意思就是给我的本地仓库添加一个名叫 <别名> 的远程仓库，地址是 <远程仓库地址>
 
 ## 日志相关
 - git status:用于显示工作目录和暂存区的状态。具体来说，它会列出在工作目录中已跟踪文件的状态（例如，哪些文件已被修改、哪些文件是新添加的、哪些文件已被删除），以及暂存区中已暂存（staged）的更改。
@@ -27,7 +28,7 @@ git pull = git fetch + git merge(从安全性角度出发，应该选择后者)�
 - git checkout -b 分支名称//基于当前的本地分支，新建一个本地分支
 - git checkout -b 分支1 分支2//基于分支2，创建本地分支1
 - git checkout -track origin/branchName(切换为远程服务器上的命名为branchName的远程分支)
-- git checkout 分支名称//切换分支
+- git checkout 分支名称//切换分支：推荐使用git switch切换分支，因为checkout的语义化不是很好，同时checkout还有丢弃变更文件的功能
 - git pull origin master先将远程仓库中的信息同步到本地仓库中
 - git push origin master 将本地版本库推送到远程服务器，
 origin是远程主机，master表示是远程服务器上的master分支和本地分支重名的简写，分支名是可以修改的
@@ -44,9 +45,9 @@ origin是远程主机，master表示是远程服务器上的master分支和本�
 - git reset HEAD 文件目录：将暂存区中的文件回退到更改状态
 
 ## 合并分支
-- git merge origin/远程分支名称
-- git rebase 分支名称
-
+- git merge origin/远程分支名称（会保留分支上完整的commit记录）
+- git rebase 分支名称（会丢弃需要变基的分支的提交记录，保留一条干净的提交记录）
+![alt text](ABFC3556-150E-4744-AFCA-5BD99190700F.png)
 **已经执行了git merge，如何中断这次merge?**
 - git merge --abort
 
