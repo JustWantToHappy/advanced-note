@@ -1,3 +1,5 @@
+## 什么是redis
+redis是一个内存型的数据库
 ## 使用Docker来使用redis
 - 使用redis必须使用docker创建并运行redis对应容器,比如:docker run -d -p 6379:6379 -v 配置文件路径 -v 外部配置文件路径:/etc/redis/redis.conf  --name 容器名称 redis redis-server 内部配置文件路径 
     - 其中/etc/redis/redis.conf指的就是内部配置文件路径
@@ -51,10 +53,11 @@ Set中的元素是不可以重复的，set命令都是以s开头
 - hgetall 哈希表名称
 - hdel 哈希表名称 key
 ## 发布订阅
-
 - subscribe 频道名称：订阅某个频道
 - publish  频道名称 消息内容：指定频道并发布消息
 ## 消息队列(Stream)
+Redis 消息队列 = 把需要异步处理的任务放到队列里，让后台慢慢处理，前端请求快速响应，同时解耦系统。
+
 stream的命令都是以x开头,因为发布订阅无法持久化，无法保存历史记录，消息队列就可以用来解决这个问题。
 
 - xadd 消息频道名称　＊　key value (*表示自动生成消息的id，也可以手动指定id)
