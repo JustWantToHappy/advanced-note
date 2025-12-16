@@ -33,6 +33,9 @@ git pull = git fetch + git merge(从安全性角度出发，应该选择后者)�
 - git push origin master 将本地版本库推送到远程服务器，
 origin是远程主机，master表示是远程服务器上的master分支和本地分支重名的简写，分支名是可以修改的
 
+## git restore
+- git restore --staged . 用来把暂存区（staging area / index）里的改动全部撤回，也就是取消 add
+
 ## git Stash命令
 我们可能需要先处理一些紧急的事情，但当前的工作尚未完成，如果我们直接提交代码会将未完成的代码也一并提交，这时就可以使用 git stash 命令保存当前的修改而不提交，待紧急事情处理完毕后再使用 git stash pop 恢复之前的修改继续开发。
 
