@@ -22,6 +22,8 @@ const update = {
 ```
 需要区分hook对象的memoizedState和fiber的memoizedState属性，前者主要记录hook对象的信息(如state,callback或者是依赖项等)，后者存储的是hook对象链表
 ## updateQueue属性
+> 注意与hook.queue.pending的区别，FiberNode.updateQueue只针对类组件的批量更新
+
 - 批量更新，在一次更新操作中，React会遍历updateQueue链表，合并相同类型的更新操作，只执行最新的更新，这样可以提高更新的效率和性能
 - 异步更新：当组件处于concurrent模式下的时候，React可以根据更新的优先级和时间片来进行适当的渲染工作
 ![Alt text](image-1.png)
@@ -47,7 +49,6 @@ const App=()=>{
   </div>
 }
 ```
-> 对于同一种setState，是通过queue.pending的环状链表实现的，但是对于不同类型的setState，我猜测应该是updateQueue进行的合并更新，可以参考上面的示例代码
 ## 调度器Scheduler
 作用:通过优先级调度和时间切片的方式，来对组件的更新和渲染进行调度和分片处理。
 根据任务的优先级和时间片的大小决定哪些任务应该优先执行，哪些应该等待下一轮空闲时间再执行。
