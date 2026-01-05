@@ -106,7 +106,9 @@ const a={
 }
 console.info(a==1&&a==2&&a==3)//true
 ```
-
+## +运算
+- 只要+两边任意一边通过toPrimitive操作之后是字符串，那么相加就是字符串拼接
+- 其他运算符，只要一边是number，另一边就会转成number
 ## ToPrimitive操作
 1. 如果obj是基本类型，直接返回
 2. 否则，调用valueOf方法，如果得到原始值，则返回
