@@ -32,3 +32,4 @@ const App=()=>{
     //如果这样的话，首次mount的时候是没有问题的，如果点击修改name的按钮之后，后面下是的carrer的值就是小王了
 }
 ```
+> 可以通过给项目使用eslint-plugin-react-hooks插件帮助检查react语法是否遵循以上规范
