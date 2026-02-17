@@ -11,6 +11,8 @@ const data = input.split(/\s+/)
  n, m = map(int, input().split())
 grid = []
 
+# 也可以使用列表推导项输入：grid = [list(map(int, input().split())) for _ in range(n)]
+
 for _ in range(n):
     row = list(map(int, input().split()))
     grid.append(row)
