@@ -114,3 +114,15 @@ console.info(a==1&&a==2&&a==3)//true
 2. 否则，调用valueOf方法，如果得到原始值，则返回
 3. 否则，调用toString方法，如果得到原始值，则返回
 4. 否则，报错
+
+## 包装类型
+有三个es提供了特殊引用类型，Boolean、Number、String，基本包装类型，和其他引用类型一致，拥有内置的方法可以对数据进行额外操作，如下：
+```javascript
+var str="Hello"
+var s2=str.charAt(0);
+console.log(s2)//H
+```
+主要原因是在执行第二行代码的时候，后台执行了如下操作：
+1. 自动创建一个String类型的实例
+2. 调用实例(对象)上指定的方法
+3. 销毁这个实例对象
