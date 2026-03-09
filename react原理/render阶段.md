@@ -125,13 +125,6 @@ function completeUnitOfWork(workInProgress){
 - 针对传入的当前节点，调用completeWork
 - 将当前节点的副作用链插入到其父节点对应的副作用链中
 - 以当前节点为起点，循环遍历其兄弟节点以及其父节点
-## beginWork和completeWork调用顺序问题
-- 对于一个Fiber节点，首先beginWork
-- 判断这个节点是否有Child：
-    - 如果有child节点则进入到child节点的beginWork阶段
-    - 如果没有,则判断是否有当前节点的sibling节点：
-        - 如果有则进入到sibling节点的beginWork阶段
-        - 如果没有则"归"到当前父节点的completeWork阶段
 ## 副作用链(effectList)的设计与实现
 副作用链可以理解为render阶段"工作成果"的一个集合
 - Fiber节点的effectList里面记录的是其需要更新的后代节点(对应completeUnitOfWork的第二点，这样当所有的节点都执行完毕completeWork工作之后，则rootFiber节点的effectList中就含有所有副作用的节点了)

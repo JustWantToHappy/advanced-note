@@ -46,7 +46,7 @@ Content-Security-Policy:
 ```
 
 解决方法
-1. csrf token，每个请求都加上这个token
-2. SameSite Cookie(Set-Cookie: session=xxx; SameSite=Strict):跨站请求不会携带token，现代网站基本都开启。
+1. csrf token，每个请求都加上这个token，跨站请求不会携带token
+2. SameSite Cookie(Set-Cookie: session=xxx; SameSite=Strict)，现代网站基本都开启。
 3. 服务器验证 Referer / Origin
 4. 二次确认，邮箱验证，手机短信验证码验证等
