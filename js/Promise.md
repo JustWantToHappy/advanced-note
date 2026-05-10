@@ -1,6 +1,6 @@
 ## Promise.all
 等待所有的promise完成，如果有一个失败就立即失败
 ## Promise.any
-只需要等待一个promise完成，如果所有的promise失败了则返回失败
+谁先“成功”用谁（失败的不算）
 ### Promise.race
-返回最先完成的promise，只要第一个promise状态不再是pending，Promise.race就会结束
+谁先“结束”用谁（不管成功失败）
