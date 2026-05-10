@@ -5,18 +5,6 @@ const input = fs.readFileSync(0, 'utf-8').trim()
 
 const data = input.split(/\s+/)
 ```
-读到EOF（文件结尾）为止的多行输入
-```javascript
-const fs = require("fs")
-
-const input = fs.readFileSync(0, "utf-8").trim().split("\n")
-
-for (const line of input) {
-  const s = line.trim()
-  if (!s) continue
-  console.log(s)
-}
-```
 # python3
 多个输入
 ```python
