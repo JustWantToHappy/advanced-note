@@ -89,6 +89,18 @@ function fn(cb: UnionTest) {
 }
 
 ```
+
+## 类型谓词
+本质是把运行时判断结果反馈给 TS 类型系统,用于类型缩小
+1. parameter is Type
+```typescript
+//不使用类型谓词
+const arr=[1,null,undefined,false];
+const filteredArr=arr.filter(item=>!!item);//(number|null|undefined|boolean)[]
+//使用类型谓词
+const filteredArr=arr.filter((item):item is number=>!!item);//number[]
+
+```
 ## 数组类型推断技巧
 ```typescript
 type ArrayIncludeTwo<T> = T extends [infer A, infer B, ...infer C]
