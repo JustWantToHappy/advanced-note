@@ -49,3 +49,63 @@ h1:has(+ p) {
 </style>
 ```
 :has() 伪类的优先级计算方法与 :is() 和 :not() 相同
+
+## :global
+注意，:global选择器并不是css标准，它是构建工具（webpack/vite/postcss）处理的，主要作用是**CSS Modules/scoped CSS 的“全局逃逸语法”,让某些样式不要被局部作用域隔离**，举例如下：
+
+```css
+//Button.module.css
+//编译前
+.title {
+  color:red;
+}
+
+:global(body){
+  margin:0;
+}
+
+:global(.ant-btn){
+  border-radius:10px;
+}
+//编译后
+.title_a8s72 {
+  color:red;
+}
+
+body {
+  margin:0;
+}
+//不要让类名被hash
+.ant-btn {
+  border-radius:10px;
+}
+
+```
+
+```html
+<template>
+  <div class="app">
+    hello
+  </div>
+</template>
+
+<style scoped>
+.app{
+  color:red;
+}
+
+:global(body){
+  margin:0;
+  background:#f5f5f5;
+}
+</style>
+//编译后：
+.app[data-v-xxxx]{
+  color:red;
+}
+
+body{
+  margin:0;
+  background:#f5f5f5;
+}
+```
