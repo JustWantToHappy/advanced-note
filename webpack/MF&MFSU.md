@@ -60,7 +60,6 @@ export default function Button() {
   return <button>Remote Button</button>;
 }
 ```
-todo: 下面内容得重新写一下：
 ## 什么是MFSU?
 用 Webpack Module Federation + 预构建依赖缓存 来加速冷启动和二次构建的方案（对 node_modules 的持久化预编译缓存机制）
 
