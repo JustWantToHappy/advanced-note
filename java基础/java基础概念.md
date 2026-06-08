@@ -143,3 +143,57 @@ a+=1;//等同于a=(short) (a+1);而不是隐式类型转换
         System.out.println(crr);//[I@b4c966a，I表示的是int类型，@是分隔符号，后面的才是真正的地址部分
         
 ```
+- 数组的动态初始化：小数类型，默认初始化值为0.0，字符串类型，默认初始化为"\u0000"空格，引用数据类型，默认初始化值为null,布尔类型，默认初始化值为false
+```java
+int arr[]=new int[100];
+arr[0]//初始化值为0
+arr[index]=xxx;
+```
+## java内存分配
+- 栈空间：例如创建一个数组arr,栈空间存储的就是arr在堆空间中的地址值，堆空存储实际的数组元素，基本数据类型的真实值就是存储在这里的，而引用数据类型的变量存的是地址值
+- 堆空间：存储的是引用类型的空间
+## 方法
+方法是程序中最小的执行单元
+```java
+//方法的定义格式
+public(方法的修饰符) static(可选) 返回类型 方法名称(参数){
+    return 返回值
+}
+```
+### 形参和实参
+- 形参：全称形式参数，指的是方法中定义的参数
+- 实参：全称实际参数，方法调用中的参数
+### 方法的重载
+在同一个类中，定义了多个同名的方法，这些同名的方法具有相同的功能，每个方法具有不同的参数类型和参数个数，这些方法构成了重载关系
+```java
+//如下两个fn方法构成了重载关系
+public class Main{
+    public static float fn(int a){
+        return 0.0f;
+    }
+    public static int fn(int a,int b){
+        return 0;
+    }
+}
+//如下两个fn不构成重载关系：因为不满足不同的参数类型和参数个数的条件
+public class Main{
+    public static float fn(int a){
+        return 0.0f;
+    }
+    public static int fn(int a){
+        return 0;
+    }
+}
+//如下两个方法构成重载关系：因为参数有不同的类型
+public class Main{
+    public static float fn(int a){
+        return 0.0f;
+    }
+    public static int fn(double a){
+        return 0;
+    }
+}
+
+```
+
+
