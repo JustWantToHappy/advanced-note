@@ -1,13 +1,26 @@
-## 发布包注意项
+## package.json文件
 - 建议在package.json中指定入口文件是打包之后的文件，如果不打包直接使用会有一些问题：
     - 性能问题
     - 兼容性问题
-- 
-## package.json文件相关
 - files选项：字段用于描述我们使用 npm publish 命令后推送到 npm 服务器的文件列表，如果指定文件夹，则文件夹内的所有内容都会包含进来。
-- npm publish：发布包
-- npm view 包名 version,npm view 包名 views：查看包的版本
-- npm publish之后使用npm version patch就可以升级补丁版本号：比如0.0.0-->0.0.1
+- exports选项：提供更加细粒度的入口控制，例如：
+```javascript
+{
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./button": {
+      "types": "./dist/button.d.ts",
+      "import": "./dist/button.js"
+    }
+  }
+}
+//两种方式引入：
+import { Button } from 'my-ui/button';
+import { Button } from 'my-ui/dist/button';
+```
 ```javascript
 //package.json
 {
@@ -18,6 +31,8 @@
     "files": [
         "dist"
     ],
+    //定义包的导出映射，控制使用者可以从哪些路径导入模块
+    "exports":{}
 }
 ```
 ## ts相关
@@ -61,3 +76,10 @@
 }
 ```
 
+## 发布注意
+- npm view 包名 version,npm view 包名 views：查看包的版本
+如下三个命令：除了升级版本号，还会自动创建commit和tag，不会主动push
+- npm version major：升级主版本号
+- npm version minor：升级次版本号
+- 使用npm version patch：升级补丁版本号：比如0.0.0-->0.0.1
+- npm publish：发布包

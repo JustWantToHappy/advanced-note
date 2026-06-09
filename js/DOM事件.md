@@ -77,7 +77,17 @@ Event（基础事件）
 ```
 
 ## DOM节点继承结构图
-![alt text](957FBB2E-2056-404B-8768-766825C3FCB3.png)
+
+EventTarget（最底层）  
+↑  
+Node（DOM 节点）  
+↑  
+Element（所有元素基类）  
+↑  
+HTMLElement（HTML 专属元素）  
+↑  
+HTMLDivElement, HTMLButtonElement, ...（具体标签）
+
 之所以最底层叫做EventTarget，是因为只要是继承EventTarget的对象都可以监听和派发事件，和事件对象继承保持独立
 
 ## drag事件
