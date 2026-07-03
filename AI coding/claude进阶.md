@@ -38,3 +38,8 @@ Codex那边也有自己的【团队约定】，和CLAUDE.md类似，只不过名
 Claude code中输入/init命令，Claude会自动扫描项目的代码，把分析出来的技术栈、目录结构、常用命令等起个CLAUDE.md的草稿
 
 /memory命令维护CLAUDE.md
+
+# 如何进阶使用Cluade code?
+- 跑大型迁移使用/batch指令，比如【整个项目从一个框架迁移到另一个框架】或者【把几十个文件的某种调用全部替换】
+- 跨大量文件的改动：正确做法是把任务拆分成多个会话+使用subagent,不是写更长的prompt，比如使用subagent去探索，写一份报告，后续任务对应不同的模块分别开一个会话基于这个报告来修改（看情况使用gitwork tree）
+- Anthropic 官方答案：先把好实践做成 skill，再用 plugin 打包分发出去，再用 MCP 把团队内部系统接进来，最后得有人维护这套东西。
