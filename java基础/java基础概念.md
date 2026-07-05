@@ -212,4 +212,86 @@ public class Main{
 
 ```
 
+## 包名
+- 包就是文件夹，用来管理各种不同功能的java类，方便后期代码维护
+- 包的规则：公司域名反写+包的作用，比如com.alipay.Student
+- 使用全类名写法：
+```java
+ //第一种写法：不推荐全类名写法
+ com.demo.User user=new  com.demo.User();
+ //第二种写法：推荐使用import导入类后使用
+ import com.demo.User;
+ User user=new User();
+```
+- 使用其他类的规则：
+	- 使用同一个包中的类的时候，不需要导包
+	- 使用java.lang包中的类的时候， 不需要导包
+	- 其他情况需要导包
+	- 如果同时使用两个包中的同名类，需要使用全类名
+
+## 代码块
+- 局部代码块：变量只能在局部代码块中访问，不能在其他位置访问，类似js的let在块级作用域中的声明
+```java
+ public  void main(String[] args) {
+        {
+            int a=10;
+        }
+				//在这里位置a变量已经销毁，本质上局部代码块可以节省内存
+    }
+```
+- 构造代码块：实例化对象的时候，先执行构造代码块，再执行构造方法
+```java
+class Student{
+    private String name;
+    //构造代码块：可以讲构造方法中的公共逻辑提取
+    {
+        System.out.println("构造方法执行了");
+    }
+    public Student(){
+//        System.out.println("构造方法执行了");
+    }
+    public Student(String name){
+//        System.out.println("构造方法执行了");
+        this.name=name;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public void setName(String name){
+        this.name=name;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student s=new Student();
+    }
+}
+
+
+```
+- 静态代码块：
+	- 格式:`static {}`
+	- 特点：需要通过static关键字修饰，随着类的加载而加载，并且自动触发，只会执行一次
+	- 使用场景：在类加载的时候，做一些数据初始化的时候使用
+```java
+class Student{
+    private String name;
+    static {
+        System.out.println("类初始化了");//只会打印一次
+				//注意：静态代码块里面只能使用静态的成员变量或者成员方法
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student s1=new Student();
+        Student s2=new Student();
+    }
+}
+
+
+```
 
