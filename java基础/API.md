@@ -115,3 +115,81 @@ System.out.println(sb1);//输出容器中反转后的内容
 	ArrayList<Integer> intList=new ArrayList<>();
 	intList.add(1);
 ```
+
+## Math类
+```java
+   System.out.println(Math.abs(-2147483648));//-2147483648，取绝对值，但是对于int的左边界不能取，因为int类型的右边界的范围比左边界范围小1
+		System.out.println(Math.abs(-2147483647));//2147483647
+		System.out.println(Math.round(4.5));//四舍五入
+		System.out.println(Math.pow(2,3));//result：8.0，获取a的b次幂
+		System.out.println(Math.random());//[0,1)之间的随机小数
+		//ceil:进一法，往数轴的正方向进一
+		System.out.println(Math.ceil(-12.4));//12.0
+		//floor:与ceil相反，正反向减一
+		//开平方根
+		Math.sqrt(4);//2.0
+		//开立方根
+		Math.cbrt(8);//2.0
+```
+
+## System
+```java
+			Scanner sc = new Scanner(System.in);
+			//0：表示当前虚拟机是正常停止
+			//非0：表示当前虚拟机异常停止
+			System.exit(0);
+			//此处代码不再执行
+			sc.nextLine();
+```
+```java
+		long l=System.currentTimeMillis();
+		System.out.println(l);//是一个时间戳，表示从时间原点到当前系统时间，使用场景：获取程序前后运行的时间
+		int arr1[]={1,2,3,4,5};
+		int arr2[]=new int[5];
+		//参数2：从数据源数组中的第几个索引开始拷贝
+		//参数4：目的地数组的索引（arr2）
+		//参数5:拷贝的个数
+		System.arraycopy(arr1,0,arr2,1,arr1.length-1);
+```
+
+## RunTime
+```java
+		Runtime r=Runtime.getRuntime();//获取当前运行环境，这是个静态方法，单例模式获取到的Runtime对象，保证整个程序生命周期使用的运行环境是一致的
+		System.out.println(r.availableProcessors());//获取CPU线程数
+		System.out.println(r.maxMemory());//单位字节；jvm能从操作系统获取到的最大内存大小
+		System.out.println(r.totalMemory());//单位字节；jvm已经从操作系统获取到的内存大小
+		System.out.println(r.freeMemory());//单位字节：jvm剩余的内存大小
+		r.exec("notepad");//运行cmd命令
+		r.exit(0);//System.exit底层调用的就是这个方法
+```
+
+## Object
+- Object是java的顶级父类，所有的类都直接或间接继承于父类
+- Object中的方法是可以被子类去访问的
+- Object只有无参的构造方法
+
+当我们打印一个对象的时候，底层会调用toString方法，把对象变成字符串
+```java
+		Object obj=new Object();
+		System.out.println(obj);//与obj.toString一样的效果
+		System.out.println(obj.toString());//result:java.lang.Object@b4c966a（包名@对象地址值）
+```
+重写equals方法
+```java
+  class Student{
+            private String name;
+
+            public Student(String name){
+                this.name=name;
+            }
+            @Override
+            public boolean equals(Object o) {
+                if (o == null || getClass() != o.getClass()) return false;
+                Student student = (Student) o;
+                return Objects.equals(name, student.name);
+            }
+        }
+        Student s1=new Student("123");
+        Student s2=new Student("123");
+        System.out.println(s1.equals(s2));//默认调用的是Object的equals（==判断地址值）方法，如果需要自定义，可以重写
+```
