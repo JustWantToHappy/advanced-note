@@ -124,8 +124,8 @@ System.out.println(sb1);//输出容器中反转后的内容
 		System.out.println(Math.pow(2,3));//result：8.0，获取a的b次幂
 		System.out.println(Math.random());//[0,1)之间的随机小数
 		//ceil:进一法，往数轴的正方向进一
-		System.out.println(Math.ceil(-12.4));//12.0
-		//floor:与ceil相反，正反向减一
+		System.out.println(Math.ceil(-12.4));//-12.0
+		//floor:与ceil相反，反向减一
 		//开平方根
 		Math.sqrt(4);//2.0
 		//开立方根
@@ -174,6 +174,7 @@ System.out.println(sb1);//输出容器中反转后的内容
 		System.out.println(obj);//与obj.toString一样的效果
 		System.out.println(obj.toString());//result:java.lang.Object@b4c966a（包名@对象地址值）
 ```
+### equals方法
 重写equals方法
 ```java
   class Student{
@@ -192,4 +193,146 @@ System.out.println(sb1);//输出容器中反转后的内容
         Student s1=new Student("123");
         Student s2=new Student("123");
         System.out.println(s1.equals(s2));//默认调用的是Object的equals（==判断地址值）方法，如果需要自定义，可以重写
+```
+### clone方法
+对象克隆：方法在底层会创建一个对象，并把原对象中的数据拷贝过去
+1. 重写Object中的clone方法
+2. 让javabean类实现Cloneable接口
+3. 创建原对象并调用clone方法
+```java
+ //Cloneable这个接口中并没有抽象方法，表示当前接口是一个标记性接口，表示当前类实现了这个接口，可被克隆
+        class Student implements Cloneable {
+            private String name;
+
+            public Student(String name){
+                this.name=name;
+            }
+
+            @Override
+            public String toString() {
+                return this.name;
+            }
+
+            @Override
+            protected Object clone() throws CloneNotSupportedException {
+                return super.clone();
+            }
+
+            @Override
+            public boolean equals(Object obj) {
+                return this.name.equals(((Student) obj).name);
+            }
+        }
+        Student s1=new Student("S1");
+        Student s2=(Student) s1.clone();
+        System.out.println(s1.equals(s2));//true
+```
+以上方法是浅拷贝，如果成员变量中的是引用数据类型，则克隆的对象与原对象使用的成员变量的地址值是同样的，以下是深拷贝方法：
+1. 基本数据类型拷贝
+2. String类型复用(串池)
+3. 其他引用数据类型重新创建
+```java
+	public class App {
+    //Cloneable这个接口中并没有抽象方法，表示当前接口是一个标记性接口，表示当前类实现了这个接口，可被克隆
+    static class Student implements Cloneable {
+        String name;
+        int[] data = new int[]{1, 2, 3};
+
+        // No-arg constructor required by Gson for deserialization
+        public Student() {
+        }
+
+        public Student(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return this.name + ", data=" + java.util.Arrays.toString(data);
+        }
+
+        @Override
+        protected Object clone() throws CloneNotSupportedException {
+            //获取原数组
+            int[] newData = new int[data.length];
+            for (int i = 0; i < data.length; i++) {
+                newData[i] = data[i];
+            }
+            Student s = (Student) super.clone();
+            s.data = newData;
+            return s;
+        }
+    }
+
+    public static void main(String[] args) throws IOException, CloneNotSupportedException {
+        Student s1 = new Student("S1");
+        Gson gson = new Gson();
+
+        String json = gson.toJson(s1);
+        System.out.println("JSON: " + json);
+        
+        Student s2 = gson.fromJson(json, Student.class);
+        System.out.println("s1: " + s1);
+        System.out.println("s2: " + s2);
+    }
+}
+```
+## BigInteger
+BigInteger底层采用的是数组存储，将数字转换为二进制之后，每32个一组作为数组中的某一项
+```java
+			//获取指定的大整数（字符串必须是整数，否则报错）
+			BigInteger bigInteger = new BigInteger("999999999999999999999999999");
+			System.out.println(bigInteger);
+			//获取指定进制的大整数
+			BigInteger bigInteger1 = new BigInteger("100",2);
+			System.out.println(bigInteger1);//100对应的2进制值转换为10进制结果为10
+			//静态方法获取到BigInteger的对象,能表示的范围比较小，在long取值范围之内
+			BigInteger bigInteger2 = BigInteger.valueOf(99999999999999999L);
+			//对内部常用数字：-16-16进行了优化，提前创建了-16-16之间的对象
+			BigInteger bigInteger3 = BigInteger.valueOf(16);
+			BigInteger bigInteger4 = BigInteger.valueOf(16);
+			System.out.println(bigInteger3==bigInteger4);//true
+```
+
+##　BigDecima
+- 用于小数的精准计算，可以用来表示很大的小数
+- BigDecima底层采用的也是数组存储：先将每位上的数字转换为ASCII码，然后存储在数组中的每一项，包括小数点
+```java
+        //使用BigDecimal(double)构造方法可能不精确
+        BigDecimal decimal1 = new BigDecimal(0.01);
+        System.out.println(decimal1);//0.010000000...
+        //使用BigDecimal(String)构造方法是精确的
+        BigDecimal decimal2 = new BigDecimal("0.01");
+        System.out.println(decimal2);//0.01
+        //BigDecimal提供的方法计算，精度是准确的
+        BigDecimal decimal3 = new BigDecimal("0.09");
+        System.out.println(decimal2.add(decimal3));//0.10
+        //通过静态方法获取对象
+        BigDecimal  decimal4 = BigDecimal.valueOf(0.01);
+        System.out.println(decimal4);//0.01
+        //如果我们要传递的是0-10的整数，包含0，包含10，那么方法就会返回已经创建好的对象，不会重新new
+        BigDecimal  decimal5 = BigDecimal.valueOf(10);
+        BigDecimal  decimal6 = BigDecimal.valueOf(10);
+        System.out.println(decimal6==decimal5);//true
+```
+## 正则表达式
+- [a-d[m-p]]:a到d或者m-p，等同于[a-dm-p]
+- [a-z&&[def]]:a-z和def的交集，为d,e,f
+- [a-z&&[^bc]]:a-z和非bc的交集
+- \表示的是转义字符，比如"\\"表示的就是斜杆，第一个\转义后面的\为普通的斜杆，再比如"\\d"，第一个\表示的是转义，而后面\d表示一个正则字符，而如果只写"\d"，	java编译器不认识这个转义序列，就会报错(转义序列比如"\n"换行，"\t"制表符，"\""双引号)
+- 通过()将正则表达式当做一个整体，比如"abab".matches("(ab)+");的结果是true
+- \w表示的是单词字符：[a-zA-Z_0-9](注意有个下划线)
+- \W表示的是非单词字符
+- x?:一次或者0次
+- x*:零次或者多次
+- x{n,}:至少n次
+- (?i):忽略大小写
+```java
+			String regex1="a(?i)bc";
+			//忽略(?i)后面字符串的大小写规则
+			System.out.println("aBC".matches(regex1));//true
+			//忽略(?i)外层括号里面字符串的大小写规则
+			String regex2="a((?i)B)c";
+			System.out.println("aBC".matches(regex2));//false
+			System.out.println("aBc".matches(regex2));//true
 ```
