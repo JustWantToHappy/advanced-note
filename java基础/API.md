@@ -397,3 +397,97 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
 				 */
 		}
 ```
+
+## 时间相关类
+世界标准时间：格林尼治时间简称GMT,现在已经被原子钟替代了
+### Date类
+```java
+        Date date=new Date();
+        System.out.println(date.getTime());//获取时间戳
+```
+### SimpleDateFormat类
+时间格式化
+```java
+  Date date=new Date();
+	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss E");
+	String str=sdf.format(date);
+	System.out.println(str);//格式化输出：2026-07-26 10:57:49 周日
+	//使用字符串(必须是标准格式，否则报错)创建SimpleDateFormat对象
+	String dateStr="2023-11-11 11:11:11";
+	SimpleDateFormat sdf1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	Date date1=sdf1.parse(dateStr);
+	System.out.println(date1);//Sat Nov 11 11:11:11 CST 2023
+```
+
+### Calendar日历类
+表示系统当前时间的日历对象，可以单独修改、获取时间中的年月日（Caleadar是一个抽象类，不能直接创建对象）
+```java
+		Calendar calendar = Calendar.getInstance();
+		System.out.println(calendar.get(Calendar.YEAR));
+		System.out.println(calendar.get(Calendar.MONTH)+1);//默认获取的月份是0~11,需要加一
+		System.out.println(calendar.get(Calendar.DAY_OF_MONTH));//获取一个月中的第几天
+		System.out.println(calendar.get(Calendar.HOUR_OF_DAY));//获取当前中的第几个小时
+		System.out.println(calendar.get(Calendar.MINUTE));//获取分
+		System.out.println(calendar.get(Calendar.SECOND));//获取秒
+		System.out.println(calendar.get(Calendar.MILLISECOND));//获取毫秒
+		System.out.println(calendar.get(Calendar.DAY_OF_WEEK));//获取一周中的第几天，默认1~7，周日表示的是一
+		//修改日历中的某个字段：public void set(int field,int value);
+		//为某个字段增加或者减少指定的值：public void add(int field,int amount);
+```
+### JDK8新增时间类
+以上3个时间类都是JDK7以及之前的类，多线程环境下会导致数据安全的问题，JDK8的时间日期对象都是不可变的
+- ZoneId:时区
+- Instant:时间戳
+- ZoneDateTime:带时区的时间
+以上类对标JDK7的Date类
+```java
+		//获取所有的时区名称
+		Set<String> zoneIds= ZoneId.getAvailableZoneIds();
+		//获取系统的默认时区
+		ZoneId zoneId=ZoneId.systemDefault();
+		System.out.println(zoneId);//Asia/Shanghai
+		Instant instant1 = Instant.ofEpochMilli(0L);
+		System.out.println(instant1);//获取时间原点的时间：1970-01-01T00:00:00Z
+		Instant instant2 = Instant.ofEpochSecond(1L);
+		System.out.println(instant2);//获取时间原点未来1s的时间：1970-01-01T00:00:01Z
+		//指定时区
+		ZonedDateTime time=Instant.now().atZone(ZoneId.of("Asia/Shanghai"));
+		System.out.println(time);//2026-07-26T11:51:16.471648200+08:00[Asia/Shanghai]
+```
+- LocalDate、LocalTime、LocalDateTime对应的是JDK7中的Calendar类
+
+## 包装类
+用一个对象把基本数据类型包起来
+- char对应的包装类是Character
+- int对应的包装类是Integer
+其他基本数据类型的包装类都是首字母大写，比如long对应Long
+```java
+		//在【-128,127】之间的数字，通过Integer.valueOf创建的对象，java内部维护了一个cache array
+		Integer i1=Integer.valueOf(127);
+		Integer i2=Integer.valueOf(127);
+		System.out.println(i1==i2);//true
+		Integer i3=Integer.valueOf(128);
+		Integer i4=Integer.valueOf(128);
+		System.out.println(i3==i4);//false
+```
+### 自动装箱和自动拆箱
+- 自动装箱：把基本数据类型自动变成其对应的包装类
+- 自动拆箱：把包装类自动的变成其对象对应的基本数据类型
+```java
+		Integer i1=10;//自动装箱
+		Integer i2=Integer.valueOf(12);
+		int i3=i2;//自动拆箱
+		System.out.println(i1+i2);//22
+```
+### 包装类的常用方法
+```java
+		String s1=Integer.toBinaryString(100);//将整数转换为2进制
+		System.out.println(s1);//1100100
+		String s2=Integer.toOctalString(100);//将整数转换为8进制
+		System.out.println(s2);//144
+		//Integer.parseInt将字符串转换为整数，类似js的parseInt，第二个参数传入进制数
+		System.out.println(Integer.parseInt("100"));//100
+		//将字符串类型转换为boolean
+		System.out.println(Boolean.parseBoolean("true"));//true
+		//Double.parseDouble
+```
