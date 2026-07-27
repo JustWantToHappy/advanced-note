@@ -573,3 +573,86 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
 		System.out.println(Boolean.parseBoolean("true"));//true
 		//Double.parseDouble
 ```
+
+## Arrays
+```java
+		int arr[]={1,2,3,4};
+		//将数组变为字符串
+		System.out.println(Arrays.toString(arr));//[1, 2, 3, 4]
+		//二分法查找元素：存在的元素返回索引值，不存在的元素返回值为：-插入点-1
+		System.out.println(Arrays.binarySearch(arr,2));//1
+		System.out.println(Arrays.binarySearch(arr,5));//-5
+		//拷贝数组
+		System.out.println(Arrays.toString(Arrays.copyOf(arr,3)));//[1,2,3]
+		//拷贝数组(指定范围:左边右开)
+		System.out.println(Arrays.toString(Arrays.copyOfRange(arr,0,3)));//[1,2,3]
+		//填充数组
+		int brr[]={1,2,3};
+		Arrays.fill(brr,0);
+		System.out.println(Arrays.toString(brr));//[0,0,0]
+		//升序排列
+		int crr[]={2,4,5,1};
+		Arrays.sort(crr);
+		System.out.println(Arrays.toString(crr));//[1,2,4,5]
+		//降序排列：需要自定义
+		Integer drr[]={2,4,1,5};
+		//排序底层原理是：插入排序+二分查找
+		Arrays.sort(drr,new Comparator<Integer>(){
+				//compare方法：参数o1:表示的是在无序序列中遍历得到的每一个元素，参数o2:表示的是在有序序列中遍历得到的每一个元素
+				//返回值：
+				//负数：表示当前插入的元素是小的，要放在前面
+				//正数：表示当前插入的元素是大的，要放在后面
+				//0：表示当前插入的元素和比较的元素是一样的，但是也是放在后面
+				@Override
+				public int compare(Integer o1, Integer o2) {
+						//这里的写法也就是说明了为什么js中Array.prototype.sort方法降序的时候回调参数写的是(a,b)=>b-a的原理了
+						if(o1<o2){
+								return 1;
+						}else if(o1>o2){
+								return -1;
+						}
+						return 0;
+				}
+		});
+		System.out.println(Arrays.toString(drr));//[5, 4, 2, 1]
+```
+## Lambda表达式
+以上降序的方法我们使用匿名内部类写的太麻烦了，可以使用lambda表达式进行简化：
+```java
+		//降序排列：需要自定义
+		Integer drr[]={2,4,1,5};
+		//排序底层原理是：插入排序+二分查找
+		Arrays.sort(drr,(Integer o1, Integer o2)-> {
+				return o2-o1;
+		});
+```
+- lambda表达式只能用来简化匿名内部类的书写
+- lambda表达式只能简化函数式接口的匿名内部类的书写
+- 函数式接口：有且只有一个抽象方法的接口叫做函数式接口，接口上方可以添加@FunctionalInterface注解表示
+lambda表达式是jdk8开始后一种新的语法形式(很像js的箭头函数)：
+```java
+()->{}
+```
+自定义实现一个lambda表达式：
+```java
+@FunctionalInterface
+interface Swim{
+    public abstract void swimming();
+}
+
+public class App {
+    public static void main(String[] args)  {
+        method(()->{
+            System.out.println("swimming");
+        });
+    }
+
+    public static void method(Swim s){
+        s.swimming();
+    }
+}
+```
+lambda表达式的简化写法：(类型也可以不写，因为可以推导出来)
+```java
+Arrays.sort(drr,(a,b)->b-a);
+```
