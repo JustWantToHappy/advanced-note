@@ -1,31 +1,36 @@
 ## 设置默认属性
+
 ```tsx
 const About: React.FC<{ style?: React.CSSProperties }> = ({ style }) => {
-	return <p style={style}>About</p>;
+  return <p style={style}>About</p>;
 };
 About.defaultProps = {
-	style: {
-		color: "orange",
-	},
+  style: {
+    color: "orange",
+  },
 };
 
 function App() {
-	return (
-		<div className="App">
-			<About />
-		</div>
-	);
+  return (
+    <div className="App">
+      <About />
+    </div>
+  );
 }
 ```
+
 ## 返回一个数组
+
 ```tsx
 const Demo = () => {
-	return [<div>1</div>, <div>2</div>];
+  return [<div>1</div>, <div>2</div>];
 };
 ```
+
 ```tsx
-const App=()=><Demo/>
+const App = () => <Demo />;
 ```
 
 ## React中的空节点
+
 null、undefined以及布尔值都是空节点

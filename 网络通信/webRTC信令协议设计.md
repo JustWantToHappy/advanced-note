@@ -8,73 +8,90 @@
 6. offer 转发offer sdp
 7. answer 转发answer sdp
 8. candidate 转发candidate sdp
+
 ## join
+
 ```javascript
-var jsonMsg={
-  "cmd":"join",
-  "roomId":roomId,
-  "uid":localUserId
-}
+var jsonMsg = {
+  cmd: "join",
+  roomId: roomId,
+  uid: localUserId,
+};
 ```
+
 ## resp-json
+
 ```javascript
-var jsonMsg={
-  "cmd":"resp join",
-  "remoteUid":remoteduid
-}
+var jsonMsg = {
+  cmd: "resp join",
+  remoteUid: remoteduid,
+};
 ```
+
 ## leave
+
 ```javascript
-var jsonMsg={
-  "cmd":"leave",
-  "roomId":roomId,
-  "uid":localUserId
-}
+var jsonMsg = {
+  cmd: "leave",
+  roomId: roomId,
+  uid: localUserId,
+};
 ```
+
 ## new-peer
+
 ```javascript
-var jsonMsg={
-  "cmd":"new-peer",
-  "remotedUid":uid
-}
+var jsonMsg = {
+  cmd: "new-peer",
+  remotedUid: uid,
+};
 ```
+
 ## peer-leave
+
 ```javascript
-var jsonMsg={
-  "cmd":"peer-leave",
-  "remoteUid":uid,
-}
+var jsonMsg = {
+  cmd: "peer-leave",
+  remoteUid: uid,
+};
 ```
+
 ## offer
+
 ```javascript
-var jsonMsg={
-  "cmd":"offer",
-  "roomId":roomId,
-  "uid":localUserid,
-  "remoteUid":remoteUserId,
-  "msg":JSON.stringfy(sessionDescription)
-}
+var jsonMsg = {
+  cmd: "offer",
+  roomId: roomId,
+  uid: localUserid,
+  remoteUid: remoteUserId,
+  msg: JSON.stringfy(sessionDescription),
+};
 ```
+
 ## answer
+
 ```javascript
-var jsonMsg={
-  "cmd":"offer",
-  "roomId":roomId,
-  "uid":localUserid,
-  "remoteUid":remoteUserId,
-  "msg":JSON.stringfy(sessionDescription)
-}
+var jsonMsg = {
+  cmd: "offer",
+  roomId: roomId,
+  uid: localUserid,
+  remoteUid: remoteUserId,
+  msg: JSON.stringfy(sessionDescription),
+};
 ```
+
 ## candidate
+
 ```javascript
-var jsonMsg={
-  "cmd":"candidate",
-  "roomId":roomId,
-  "uid":localUserId,
-  "remoteUid":remoteUserId,
-  "msg":JSON.stringify(candidateJson)
-}
+var jsonMsg = {
+  cmd: "candidate",
+  roomId: roomId,
+  uid: localUserId,
+  remoteUid: remoteUserId,
+  msg: JSON.stringify(candidateJson),
+};
 ```
+
 ## offer、answer、candidate信令实现
 
 1. 收到new-peer，作为发起者创建RTCPeerConnection，绑定事件响应函数，加入到本地流

@@ -1,12 +1,16 @@
 # javascript
-```javascript
-const fs = require("fs")
-const input = fs.readFileSync(0, 'utf-8').trim()
 
-const data = input.split(/\s+/)
+```javascript
+const fs = require("fs");
+const input = fs.readFileSync(0, "utf-8").trim();
+
+const data = input.split(/\s+/);
 ```
+
 # python3
+
 多个输入
+
 ```python
  n, m = map(int, input().split())
 grid = []
@@ -24,19 +28,25 @@ if __name__=="__main__":
     main();
 
 ```
+
 单个输入
+
 ```python
 n=int(input())
 ```
+
 读到EOF（文件结尾）为止的多行输入
 
 第一种方式
+
 ```python
 import sys
 for line in sys.stdin:
     s = line.strip()
 ```
+
 第二种方式
+
 ```python
 while True:
     try:

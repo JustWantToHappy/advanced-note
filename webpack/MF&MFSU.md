@@ -1,5 +1,7 @@
 ## 什么是MF？
+
 全称：Module Federation，是一种让“模块”可以在多个应用之间“联合”起来使用的一种技术，例如：
+
 ```javascript
 //主应用webpack配置
 const { ModuleFederationPlugin } = require("webpack").container;
@@ -33,6 +35,7 @@ export default function App() {
   );
 }
 ```
+
 ```javascript
 //子应用webpack配置
 const { ModuleFederationPlugin } = require("webpack").container;
@@ -60,15 +63,20 @@ export default function Button() {
   return <button>Remote Button</button>;
 }
 ```
+
 ## 什么是MFSU?
+
 用 Webpack Module Federation + 预构建依赖缓存 来加速冷启动和二次构建的方案（对 node_modules 的持久化预编译缓存机制）
 
 ## 传统webpack痛点
+
 -node_modules太大，依赖多,冷启动慢,每次dev server启动都要重新解析依赖,HMR解决不了"首次加载慢"
 
 ## MFSU核心思想
+
 1. 模块联邦(允许不同构建产物之间共享模块)
 2. 预构建依赖（Pre-bundling）：把 node_modules 提前打包成“稳定产物”
+
 ```
 .mfsu/
   vendor.js

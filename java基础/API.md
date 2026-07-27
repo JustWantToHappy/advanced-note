@@ -1,8 +1,12 @@
 ## API
+
 目前JDK中提供的各种功能的java类
+
 ## String类
+
 - java.lang包中的String类，无需导包
 - String对象在创建之后无法变更
+
 ```java
         char chrs[]={'a','b','c','d'};
         System.out.println(new String(chrs));//abcd
@@ -11,16 +15,21 @@
 ```
 
 ### 字符串的一些常用方法
+
 ```java
         String a="abc";//记录的是串池中对象的地址
         String b=new String("abc");//记录的是堆中对象的地址
         System.out.println(a==b);//false
 ```
+
 - 如果想要比较内容如何处理？
+
 ```java
 System.out.println(a.equals(b));//true
 ```
+
 - 判断字符是否是大写字母or小写字母的技巧：
+
 ```java
 String a="aAz";
 char c=a.charAt(index);
@@ -29,7 +38,9 @@ if(c>='a'&&c<='z'){
     System.out.println("是小写字母");
 }
 ```
+
 - replace方法：用于替换敏感信息为*非常有用
+
 ```java
 String str = "hello world";
 String newStr = str.replace('l', 'x');
@@ -38,12 +49,16 @@ System.out.println(newStr); // hexxo worxd
 ```
 
 ### 字符串拼接的底层原理
+
 1. 无变量参与的拼接
+
 ```java
 String str="a"+"b"+"c";//等同于String str="abc"，编译层会优化
 ```
+
 2. 有变量参与的拼接
-jdk8之前，底层使用的是StringBuilder
+   jdk8之前，底层使用的是StringBuilder
+
 ```java
 String s1="a";
 String s2=s1+"b";//等同于new StringBuilder().append(s1).append("b").toString();这里至少创建了两个对象，一个StringBuilder以及toString()方法也会创建一个对象
@@ -51,6 +66,7 @@ String s3=s2+"c";//与上面保持一致
 ```
 
 jdk8的拼接底层
+
 ```java
 String s1="a";
 String s2=s1+"b";//创建一个字符串数组，预估长度为2，将字符串放入数组后拼接成字符串对象
@@ -58,8 +74,11 @@ String s3=s2+"c";//与上面保持一致
 ```
 
 最终结论：不要使用+拼接字符串变量，浪费内存空间
+
 ### StringBuilder
+
 StringBuilder可以看做一个容器，创建之后里面的内容是可以发生变化的
+
 ```java
 //为什么使用StringBuilder
 String s1=a+b+d;//这里每次都会创建新的字符串对象
@@ -77,11 +96,15 @@ sb1.append(2.3);
 sb1.reverse();
 System.out.println(sb1);//输出容器中反转后的内容
 ```
+
 #### StringBuilder底层原理
+
 初始化一个默认容量16的数组，比如容量不够，比如我们放入了a-z26个英文字母之后，StringBuilder就会扩容：老容量*2+2=34，如果我们放入的字符串长度为36，超过了34，那就默认以最终的字符串长度为准，也就是扩容到36
 
 ### StringJoiner
+
 是一个容器，内容可发生变化，JDK8出现
+
 ```java
 			int arr[]=new int[]{1,2,3};
 			//将数组拼接成字符串，第一个参数是分隔符号，第二个字符串参数是拼接字符串的开始，第三个字符串参数是拼接字符串的结束
@@ -91,9 +114,12 @@ System.out.println(sb1);//输出容器中反转后的内容
 			}
 			System.out.println(sj.toString());//[1,2,3]
 ```
+
 ## 集合
+
 - 自动扩容
 - 只能存储引用数据类型，如果要存储基本数据类型，需要转换为包装类
+
 ```java
 //集合的增删改查
 	ArrayList<String> list=new ArrayList<String>();
@@ -117,6 +143,7 @@ System.out.println(sb1);//输出容器中反转后的内容
 ```
 
 ## Math类
+
 ```java
    System.out.println(Math.abs(-2147483648));//-2147483648，取绝对值，但是对于int的左边界不能取，因为int类型的右边界的范围比左边界范围小1
 		System.out.println(Math.abs(-2147483647));//2147483647
@@ -133,6 +160,7 @@ System.out.println(sb1);//输出容器中反转后的内容
 ```
 
 ## System
+
 ```java
 			Scanner sc = new Scanner(System.in);
 			//0：表示当前虚拟机是正常停止
@@ -141,6 +169,7 @@ System.out.println(sb1);//输出容器中反转后的内容
 			//此处代码不再执行
 			sc.nextLine();
 ```
+
 ```java
 		long l=System.currentTimeMillis();
 		System.out.println(l);//是一个时间戳，表示从时间原点到当前系统时间，使用场景：获取程序前后运行的时间
@@ -153,6 +182,7 @@ System.out.println(sb1);//输出容器中反转后的内容
 ```
 
 ## RunTime
+
 ```java
 		Runtime r=Runtime.getRuntime();//获取当前运行环境，这是个静态方法，单例模式获取到的Runtime对象，保证整个程序生命周期使用的运行环境是一致的
 		System.out.println(r.availableProcessors());//获取CPU线程数
@@ -164,18 +194,23 @@ System.out.println(sb1);//输出容器中反转后的内容
 ```
 
 ## Object
+
 - Object是java的顶级父类，所有的类都直接或间接继承于父类
 - Object中的方法是可以被子类去访问的
 - Object只有无参的构造方法
 
 当我们打印一个对象的时候，底层会调用toString方法，把对象变成字符串
+
 ```java
 		Object obj=new Object();
 		System.out.println(obj);//与obj.toString一样的效果
 		System.out.println(obj.toString());//result:java.lang.Object@b4c966a（包名@对象地址值）
 ```
+
 ### equals方法
+
 重写equals方法
+
 ```java
   class Student{
             private String name;
@@ -194,11 +229,15 @@ System.out.println(sb1);//输出容器中反转后的内容
         Student s2=new Student("123");
         System.out.println(s1.equals(s2));//默认调用的是Object的equals（==判断地址值）方法，如果需要自定义，可以重写
 ```
+
 ### clone方法
+
 对象克隆：方法在底层会创建一个对象，并把原对象中的数据拷贝过去
+
 1. 重写Object中的clone方法
 2. 让javabean类实现Cloneable接口
 3. 创建原对象并调用clone方法
+
 ```java
  //Cloneable这个接口中并没有抽象方法，表示当前接口是一个标记性接口，表示当前类实现了这个接口，可被克隆
         class Student implements Cloneable {
@@ -227,10 +266,13 @@ System.out.println(sb1);//输出容器中反转后的内容
         Student s2=(Student) s1.clone();
         System.out.println(s1.equals(s2));//true
 ```
+
 以上方法是浅拷贝，如果成员变量中的是引用数据类型，则克隆的对象与原对象使用的成员变量的地址值是同样的，以下是深拷贝方法：
+
 1. 基本数据类型拷贝
 2. String类型复用(串池)
 3. 其他引用数据类型重新创建
+
 ```java
 	public class App {
     //Cloneable这个接口中并没有抽象方法，表示当前接口是一个标记性接口，表示当前类实现了这个接口，可被克隆
@@ -270,15 +312,18 @@ System.out.println(sb1);//输出容器中反转后的内容
 
         String json = gson.toJson(s1);
         System.out.println("JSON: " + json);
-        
+
         Student s2 = gson.fromJson(json, Student.class);
         System.out.println("s1: " + s1);
         System.out.println("s2: " + s2);
     }
 }
 ```
+
 ## BigInteger
+
 BigInteger底层采用的是数组存储，将数字转换为二进制之后，每32个一组作为数组中的某一项
+
 ```java
 			//获取指定的大整数（字符串必须是整数，否则报错）
 			BigInteger bigInteger = new BigInteger("999999999999999999999999999");
@@ -295,8 +340,10 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
 ```
 
 ## BigDecima
+
 - 用于小数的精准计算，可以用来表示很大的小数
 - BigDecima底层采用的也是数组存储：先将每位上的数字转换为ASCII码，然后存储在数组中的每一项，包括小数点
+
 ```java
         //使用BigDecimal(double)构造方法可能不精确
         BigDecimal decimal1 = new BigDecimal(0.01);
@@ -315,12 +362,15 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
         BigDecimal  decimal6 = BigDecimal.valueOf(10);
         System.out.println(decimal6==decimal5);//true
 ```
+
 ## 正则表达式
+
 - [a-d[m-p]]:a到d或者m-p，等同于[a-dm-p]
 - [a-z&&[def]]:a-z和def的交集，为d,e,f
 - [a-z&&[^bc]]:a-z和非bc的交集
-- \表示的是转义字符，比如"\\\\"表示的就是斜杆，第一个\转义后面的\为普通的斜杆，再比如"\\\\d"，第一个\表示的是转义，而后面\d表示一个正则字符，而如果只写"\d"，	java编译器不认识这个转义序列，就会报错(转义序列比如"\n"换行，"\t"制表符，"\""双引号)
+- \表示的是转义字符，比如"\\\\"表示的就是斜杆，第一个\转义后面的\为普通的斜杆，再比如"\\\\d"，第一个\表示的是转义，而后面\d表示一个正则字符，而如果只写"\d"， java编译器不认识这个转义序列，就会报错(转义序列比如"\n"换行，"\t"制表符，"\""双引号)
 - 分组：通过()将正则表达式当做一个整体，比如"abab".matches("(ab)+");的结果是true，一个()表示的就是一个分组，正则表达式中每个分组都有序号，从左到右，左括号出现的位置表示的就是序号位置，比如(\\d+(\\s+))(0|1)，\\d前面的()表示的就是第一个分组，\\s+前面的()表示的就是第二个分组，0|1前面的表示的就是最后一个分组
+
 ```java
 			String regex1="a(?i)bc";
 			//忽略(?i)后面字符串的大小写规则
@@ -330,6 +380,7 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
 			System.out.println("aBC".matches(regex2));//false
 			System.out.println("aBc".matches(regex2));//true
 ```
+
 - \w表示的是单词字符：[a-zA-Z_0-9](注意有个下划线)
 - \W表示的是非单词字符
 - x?:一次或者0次
@@ -340,6 +391,7 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
 - \\D表示非0-9
 - \\S表示非空白字符
 - 字符串常用的正则表达式相关的方法:replaceAll&split
+
 ```java
 			String str="I 123 you";
 			String result=str.replaceAll("\\d+","love");
@@ -349,10 +401,14 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
 					System.out.println(arr[i]);
 			}
 ```
+
 ### 捕获分组
+
 后续还要使用本组的数据
+
 1. 正则内部使用:\\组号
 2. 正则外部使用:$组号
+
 ```java
 					//判断字符串开始和结束字符是否相同
 			String str="a123a";
@@ -365,12 +421,16 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
 			String str3="我要吃饭饭饭";
 			System.out.println(str3.replaceAll("(.)\\1+","$1"));//我要吃饭
 ```
+
 ### 非捕获分组
+
 分组之后不需要再使用本组数据，仅仅是将数据括起来
+
 - (?:正则)获取所有
 - (?=正则)获取前面部分
 - (?!正则)获取不是指定内容的前面部分
 - 非捕获分组是不占用组号的
+
 ```java
 	  String str="Java的长期版本Java8";
 		Pattern pattern = Pattern.compile("Java(?=8|11|17)");//匹配上Java8或者Java11或者Java17,但是只获取前面的部分，也就是Java
@@ -381,6 +441,7 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
 ```
 
 ### Pattern类
+
 ```java
 		String str="Java是一门高级语言，其中Java8、Java11、Java17是长期支持版本";
 		//1. 获取正则表达式的对象
@@ -399,14 +460,20 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
 ```
 
 ## 时间相关类
+
 世界标准时间：格林尼治时间简称GMT,现在已经被原子钟替代了
+
 ### Date类
+
 ```java
         Date date=new Date();
         System.out.println(date.getTime());//获取时间戳
 ```
+
 ### SimpleDateFormat类
+
 时间格式化
+
 ```java
   Date date=new Date();
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss E");
@@ -420,7 +487,9 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
 ```
 
 ### Calendar日历类
+
 表示系统当前时间的日历对象，可以单独修改、获取时间中的年月日（Caleadar是一个抽象类，不能直接创建对象）
+
 ```java
 		Calendar calendar = Calendar.getInstance();
 		System.out.println(calendar.get(Calendar.YEAR));
@@ -434,12 +503,16 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
 		//修改日历中的某个字段：public void set(int field,int value);
 		//为某个字段增加或者减少指定的值：public void add(int field,int amount);
 ```
+
 ### JDK8新增时间类
+
 以上3个时间类都是JDK7以及之前的类，多线程环境下会导致数据安全的问题，JDK8的时间日期对象都是不可变的
+
 - ZoneId:时区
 - Instant:时间戳
 - ZoneDateTime:带时区的时间
-以上类对标JDK7的Date类
+  以上类对标JDK7的Date类
+
 ```java
 		//获取所有的时区名称
 		Set<String> zoneIds= ZoneId.getAvailableZoneIds();
@@ -454,13 +527,17 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
 		ZonedDateTime time=Instant.now().atZone(ZoneId.of("Asia/Shanghai"));
 		System.out.println(time);//2026-07-26T11:51:16.471648200+08:00[Asia/Shanghai]
 ```
+
 - LocalDate、LocalTime、LocalDateTime对应的是JDK7中的Calendar类
 
 ## 包装类
+
 用一个对象把基本数据类型包起来
+
 - char对应的包装类是Character
 - int对应的包装类是Integer
-其他基本数据类型的包装类都是首字母大写，比如long对应Long
+  其他基本数据类型的包装类都是首字母大写，比如long对应Long
+
 ```java
 		//在【-128,127】之间的数字，通过Integer.valueOf创建的对象，java内部维护了一个cache array
 		Integer i1=Integer.valueOf(127);
@@ -470,16 +547,21 @@ BigInteger底层采用的是数组存储，将数字转换为二进制之后，�
 		Integer i4=Integer.valueOf(128);
 		System.out.println(i3==i4);//false
 ```
+
 ### 自动装箱和自动拆箱
+
 - 自动装箱：把基本数据类型自动变成其对应的包装类
 - 自动拆箱：把包装类自动的变成其对象对应的基本数据类型
+
 ```java
 		Integer i1=10;//自动装箱
 		Integer i2=Integer.valueOf(12);
 		int i3=i2;//自动拆箱
 		System.out.println(i1+i2);//22
 ```
+
 ### 包装类的常用方法
+
 ```java
 		String s1=Integer.toBinaryString(100);//将整数转换为2进制
 		System.out.println(s1);//1100100

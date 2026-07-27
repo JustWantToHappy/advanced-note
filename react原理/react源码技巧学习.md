@@ -1,18 +1,21 @@
 ## 代码技巧
+
 1. 使用Symbol.for方法注册常量，保证变量唯一性，且无法被修改
 2. 使用{}：
-    - 作用域隔离：提供作用域隔离，避免变量污染
-    - 代码组织结构：区分生产环境以及开发环境，增强代码可读性
+   - 作用域隔离：提供作用域隔离，避免变量污染
+   - 代码组织结构：区分生产环境以及开发环境，增强代码可读性
+
 ```javascript
-function xxx(){
+function xxx() {
   {
     topLevelUpdateWarnings(container);
   }
   //...
 }
-
 ```
+
 3. 使用位运算
+
 ```javascript
 var NoContext = 0;
 var ConcurrentMode = 1;

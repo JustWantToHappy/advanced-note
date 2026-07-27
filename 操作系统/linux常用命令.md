@@ -1,5 +1,6 @@
 ## linux相关命令
--  vim中在一般模式下复制yy,粘贴p，删除一行dd
+
+- vim中在一般模式下复制yy,粘贴p，删除一行dd
 - 复制文件以及文件夹:cp [配置项] 1.txt /niuma(配置项有:-r表示递归)
 - cal查看日历，date查看日期
 - 创建空文件:touch a.txt
@@ -41,10 +42,12 @@ owner,group,others,权限顺序为：readable,writable,excutable,如：-r-xr-r�
 第六列表示文档最后修改时间，注意不是文档的创建时间哦
 第七列表示文档名称，（以.开头的表示隐藏文档）
 ```
+
 - 改变用户所在组：(在root的管理权限下),可以改变某个用户所在的组
-a.usermod -g 新组名 用户名
-b.usermod -d 目录名 用户名，改变用户登录的初始目录
+  a.usermod -g 新组名 用户名
+  b.usermod -d 目录名 用户名，改变用户登录的初始目录
 - 修改权限：使用chmod命令
+
 ```shell
 第一种方式：+,-,=变更权限
 u拥有者；g所在组；o其他人；a所有人(u，g，o的总和)
@@ -54,9 +57,12 @@ chmod a-x 文件/目录名(将所有人关于该文件/目录的x权限去掉)
 r=4;w=2;x=1;rwx=4+2+1=7
 chmod u=rwx,g=rx,o=x 文件/目录名相当于chmod 751 文件/目录名
 ```
+
 - 修改文件的所有者chown
+
 ```shell
 chown newowner 文件/目录名              改变所有者
 chown newowner:newgroup 文件/目录名          改变所有者和所在组
 ```
+
 - 查看文件内容的命令：cat 文件名称或者tail 文件名称或者more 文件名称

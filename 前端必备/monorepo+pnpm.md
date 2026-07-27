@@ -4,6 +4,7 @@
 - 可以直接在根目录中直接安装对应子包的依赖项，pnpm i -F core
 - 如果多个包都配置好了依赖，想要一键安装，pnpm i -r，r表示递归的意思,也可以指定多个包安装的依赖：pnpm i -F core ui util
 - 如果某个包要使用另一个包的内容：
+
 ```javascript
 package.json中添加要使用的包
 "dependencies": {

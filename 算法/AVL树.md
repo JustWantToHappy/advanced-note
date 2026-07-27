@@ -1,11 +1,14 @@
 ## AVL树的旋转
+
 1. 左旋转
 2. 左右旋转
 3. 右旋转
 4. 右左旋转
 
 ## 构建过程
+
 `懂了左旋，右旋是和左旋相反的过程，而左右旋和右左旋转是左旋和右旋组合的结果`
+
 ```python
 # Definition for singly-linked list.
 # class ListNode:

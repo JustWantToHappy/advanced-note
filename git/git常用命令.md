@@ -1,25 +1,31 @@
 ## git流程图
+
 ![alt text](image.png)
 
 git pull = git fetch + git merge(从安全性角度出发，应该选择后者)，比如你只想要查看一下远程分支的更新，而不是立即合并可以使用后者
+
 ## 查看用户信息
+
 - git config user.name 查看用户名
-- git config user.email  查看邮箱
+- git config user.email 查看邮箱
 
 ## git仓库相关
+
 - git remote -v: 查看远程配置
 - git remote remove origin(移除仓库)
 - git remote add origin 仓库地址(绑定远程仓库,注意可以绑定多个远程仓库),这个命令的意思就是给我的本地仓库添加一个名叫 <别名> 的远程仓库，地址是 <远程仓库地址>
 
 ## 日志相关
+
 - git status:用于显示工作目录和暂存区的状态。具体来说，它会列出在工作目录中已跟踪文件的状态（例如，哪些文件已被修改、哪些文件是新添加的、哪些文件已被删除），以及暂存区中已暂存（staged）的更改。
 - git log可以查看当前分支的提交记录以及**commit id**,这个commit id很重要，可以用来回滚
 - git diff命令：查看分支之间的差异
-    - git diff A...B
-    - git diff A..B
+  - git diff A...B
+  - git diff A..B
 - git reflog:它提供了本地仓库中 HEAD 和分支引用（branch references）的历史记录
 
 ## 分支相关
+
 - git branch branchName(在本地创建一个命名为branchName的分支）
 - git branch(查看当前自己所在的分支本地分支)
 - git branch -a(查看服务器的所有分支以及自己所在的分支，远程分支颜色为红色)
@@ -32,52 +38,67 @@ git pull = git fetch + git merge(从安全性角度出发，应该选择后者)�
 - git checkout 分支名称//切换分支：推荐使用git switch切换分支，因为checkout的语义化不是很好，同时checkout还有丢弃变更文件的功能
 - git pull origin master先将远程仓库中的信息同步到本地仓库中
 - git push origin master 将本地版本库推送到远程服务器，
-origin是远程主机，master表示是远程服务器上的master分支和本地分支重名的简写，分支名是可以修改的
+  origin是远程主机，master表示是远程服务器上的master分支和本地分支重名的简写，分支名是可以修改的
 
 ## git restore
+
 - git restore --staged . 用来把暂存区（staging area / index）里的改动全部撤回，也就是取消 add
 
 ## git Stash命令
+
 我们可能需要先处理一些紧急的事情，但当前的工作尚未完成，如果我们直接提交代码会将未完成的代码也一并提交，这时就可以使用 git stash 命令保存当前的修改而不提交，待紧急事情处理完毕后再使用 git stash pop 恢复之前的修改继续开发。
 
 - git stash list:查看stash栈
 - git stash pop (数字可选)
-- git stash save "注释":压栈 
+- git stash save "注释":压栈
 - git stash:压栈
 - git stash push --staged：只将暂存区的代码压入stash栈
 
 ## git worktree
+
 一个git仓库通常只有一个工作目录，但 worktree 可以让你：一个目录开发 A 功能m另一个目录开发 B 功能,不需要频繁切换分支
 
 非常适合 AI 编程、多 feature 并行开发。
+
 - git worktree add -b <新分支名> <目录路径> [基于哪个分支]
 - git worktree remove 目录路径
+
 ## 回滚代码相关
+
 - 参考*不小心commit或者不小心push了怎么办*
 - git reset HEAD 文件目录：将暂存区中的文件回退到更改状态
 
 ## 合并分支
+
 - git merge origin/远程分支名称（会保留分支上完整的commit记录）
 - git rebase 分支名称（会丢弃需要变基的分支的提交记录，保留一条干净的提交记录）
-![alt text](ABFC3556-150E-4744-AFCA-5BD99190700F.png)
-**已经执行了git merge，如何中断这次merge?**
+  ![alt text](ABFC3556-150E-4744-AFCA-5BD99190700F.png)
+  **已经执行了git merge，如何中断这次merge?**
 - git merge --abort
 
 ## 不小心commit或者不小心push了怎么办
+
 1. git reset --soft HEAD~1(这个数字1可以替换成其他数字，2,3,4...)(除了加上数字还可以加上commit id)
 2. git reset HEAD~1(这个数字1可以替换成其他数字，2,3,4...)(除了加上数字还可以加上commit id)
-区别：加了--soft回到到保留更改且留在暂存区，而没有加的其实是--mixed的简写形式，它会回退到工作区
-**还有加上--hard的用法：谨慎使用，比如你回退到上上个版本的commit id，那你上一个版本的代码丢失**
+   区别：加了--soft回到到保留更改且留在暂存区，而没有加的其实是--mixed的简写形式，它会回退到工作区
+   **还有加上--hard的用法：谨慎使用，比如你回退到上上个版本的commit id，那你上一个版本的代码丢失**
 3. git reset --soft origin/master: 用来查看当前分支和远程分支的区别
 
 ## 如果遇到git命令进程崩溃怎么办
+
 删除.git目录下的index.lock文件
+
 ## 如何使用git命令创建一个远程
+
 创建一个本地分支后，提交完代码之后，执行git push origin 本地分支名称，就可以创建一个和当前本地分支名称相同的远程分支了。
+
 ## git hub搜索技巧
+
 ```
 python in:description 豆瓣  created:>2016-04-29 stars:>10
 第一个python表示要搜索的名称
 ```
+
 ## tips
+
 - 必须使用git init命令创建仓库，执行git add . 和git commit（提交成功后）,再使用git branch命令，才显示出本地分支：因为git的分支必须指向一个commit，没有任何commit就没有任何分支

@@ -1,49 +1,53 @@
 ## 概念
-JSDOC是文档注释，jsDoc是一种统一的注释规范，它以/**或者/***开头，以*/结尾
+
+JSDOC是文档注释，jsDoc是一种统一的注释规范，它以/**或者/**_开头，以_/结尾
+
 ## type
+
 ```javascript
 /**
  * @type {number}
  */
-let a;//number
+let a; //number
 ```
+
 ## returns
+
 ```javascript
 /**
- * 
+ *
  * @returns {Function} 返回一个函数
  */
 function bbb() {
-	return function () {
-
-	}
+  return function () {};
 }
 ```
+
 ## param
+
 ```javascript
 /***
  * @param {Object} a
  * @param {string} a.name 名称
  * @param {number} a.age 年龄
  */
-function demo(a) {
-
-}
-
+function demo(a) {}
 ```
+
 ## 可选属性
+
 ```javascript
 /***
  * @param {Object} a
  * @param {string} a.name 名称
  * @param {number} [a.age] 年龄
  */
-function demo(a) {
-
-}
+function demo(a) {}
 //这样年龄就是可选属性了
 ```
+
 ## 自定义类型typedef
+
 ```javascript
 //正确写法
 /**
@@ -65,8 +69,11 @@ let a;
  */
 let a;
 ```
+
 ## ts中的注释
+
 ts注释不需要指定类型
+
 ```typescript
 import React from "react";
 /**
@@ -97,12 +104,14 @@ export function useDebouce<T extends (...args: unknown[]) => unknown>(
 ```
 
 ## 引入其他库的类型
+
 用法:花括号中import("xxx").XXX
+
 ```javascript
 /**
  * @typedef CustomFormType
  * @property {import("antd/lib/form/Form").useForm} useForm
- * 
+ *
  *
  */
 /**
