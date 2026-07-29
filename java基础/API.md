@@ -116,10 +116,92 @@ System.out.println(sb1);//输出容器中反转后的内容
 ```
 
 ## 集合
+- 单列集合：Collection
+	- List系列集合：添加的元素是有序的、可重复的、有索引的
+	- Set系列集合：添加的元素是无序、不重复的、无索引的
+![alt text](image-4.png)
+- 双列集合：Map
 
+### Collection
+#### Collction的基本方法
+Collection是单列集合的祖宗接口，它的功能是全部单列即可都可以继承使用的
+- public boolean add(E e)
+- public void clear()
+- public boolean remove(E e)
+- public boolean contains(Object obj)：判断集合是否包含当前的对象
+- public boolean isEmpty()
+- public int size()
+
+```java
+  Collection<String> collection=new ArrayList<String>();
+	boolean b=collection.add("a");
+	//往List系列集合中添加元素永远返回值为true，如果往Set系列集合中添加元素可能返回为false,因为元素不能够重复
+	collection.add("b");
+	System.out.println(collection);//[a,b]
+	System.out.println(b);//true
+	//底层是通过Object.equals方法判断对象是否相同的，如果集合存储的是自定义对象，需要重写equals方法
+	//为什么String和Integer不需要重写equals方法，这是因为jdk已经重写了这两个类的equals方法，比如字符串就是比较的每个字符内容是否相同
+	System.out.println(collection.contains("a"));//true
+```
+#### Collection的遍历方式
+1. 迭代器遍历：迭代器在java中的类是Iterator,迭代器是集合专用的遍历方式
+```java
+ Collection<String> collection=new ArrayList<String>();
+	boolean b=collection.add("a");
+	collection.add("b");
+	Iterator<String> iterator=collection.iterator();
+	//迭代器遍历完毕，是不会复位的，如果要再遍历一次集合，重新获取一个迭代器
+	while(iterator.hasNext()){
+			String result=iterator.next();
+			System.out.println(result);
+			//在迭代器遍历的时候不要使用集合的方法去对集合进行增加和删除元素
+			//但是可以使用迭代器中的方法进行删除
+			if(result.equals("a")){
+				iterator.remove();
+			}
+	}
+	//iterator.next();循环结束之后如果还调用next方法会抛出错误：NoSuchElementException
+```
+2. 增强for遍历：简化迭代器代码书写的，jdk5之后出现，底层就是iterator,所有的单列集合以及数组才能够使用增强for循环
+```java
+  Collection<String> collection=new ArrayList<String>();
+	boolean b=collection.add("a");
+	collection.add("b");
+	for(String s:collection){
+			System.out.println(s);
+	}
+	//数组也可以使用
+	int arr[]={1,2,3,4,5};
+	for(int num:arr){
+			System.out.println(num);
+	}
+```
+3. lambda表达式遍历
+```java
+ Collection<String> collection=new ArrayList<String>();
+	boolean b=collection.add("a");
+	collection.add("b");
+	//使用匿名内部类的方式
+	collection.forEach(new Consumer<String>() {
+			@Override
+			public void accept(String s) {
+					System.out.println(s);
+			}
+	});
+	//使用lambda表达式的方式
+	collection.forEach(s->{
+			System.out.println(s);
+	});
+```
+> 总结：如果是普通遍历使用增强for循环或者lambda表达式，如果要在遍历过程中删除元素，则使用迭代器
+#### ArrayList
 - 自动扩容
 - 只能存储引用数据类型，如果要存储基本数据类型，需要转换为包装类
-
+底层原理：
+1. 利用空参创建的集合，在底层会创建一个默认长度为10的数组
+2. 添加第一个元素的时候，底层会创建一个新的长度为10的数组
+3. 存满时会扩容1.5倍(创建一个新的数组，把原数组内容复制过来)，后续如果又满了，继续扩容
+4. 如果一次创建多个元素，1.5倍(15)放不下,则新创建数组的长度以实际为准。比如通过一次性添加100个，则在10的基础上再加100，也就是数组长度初始化为110
 ```java
 //集合的增删改查
 	ArrayList<String> list=new ArrayList<String>();
@@ -141,6 +223,14 @@ System.out.println(sb1);//输出容器中反转后的内容
 	ArrayList<Integer> intList=new ArrayList<>();
 	intList.add(1);
 ```
+#### LinkedList集合
+底层数据结构是双链表，查询慢，首尾操作的速度还是很快的
+- public void addFirst(E e)
+- public void addLast(E e)
+- public E getFirst()
+- public E getLast()
+- public E removeFirst()
+- public E removeLast()
 
 ## Math类
 
