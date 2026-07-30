@@ -114,6 +114,67 @@ System.out.println(sb1);//输出容器中反转后的内容
 			}
 			System.out.println(sj.toString());//[1,2,3]
 ```
+## 泛型
+jdk5引入的新特性，可以在编译阶段约束操作的数据类型，并进行检查
+- 泛型只支持引用数据类型
+- 统一了数据类型，把运行期间的问题提前到了编译阶段，避免了强制类型转换可能出现的异常，因为在编译阶段类型就能确认下来
+- 如果不写泛型，默认就是Object类型
+- 指定泛型的具体类型之后，传递数据的时候，可以传入该类类型或者其子类类型(不建议传入子类类型)
+
+```java
+//泛型类
+class Demo<T>{
+    public T name;
+    
+    public T getName(){
+        return this.name;
+    }
+    
+    public void setName(T name){
+        this.name = name;
+    }
+}
+//泛型方法
+class Demo{
+    public <T> void sayHello(T a){
+        T t=a;
+    }
+}
+//可变参数
+class Demo{
+    public Demo(){
+        print("1","2","3");
+    }
+    //支持传入多个参数，e是个数组
+    public static<T> void print(T ...e){
+        for(T t:e){
+            System.out.print(t);
+        }
+    }
+}
+//泛型接口
+interface Inter<T>{}
+```
+### 泛型的通配符
+1. ?可以表示不确定的类型
+2. 可以进行类型的限定：? extends E：表示可以传递E或者E的子类型，? super E：表示可以传递E或者E的父类类型
+3. 使用场景：如果某个类型不确定同时只能传递某个继承体系的，就可以使用泛型的通配符了
+```java
+public class App {
+    public static void main(String[] args)  {
+        ArrayList<G> list1=new  ArrayList<>();
+        ArrayList<F> list2=new  ArrayList<>();
+        add(list1);
+        add(list2);
+    }
+    public static void add(ArrayList<? extends G> list){}
+    //也可以使用下面这种方式进行类型约束
+//    public static<T extends G> void add(ArrayList<T> list) {}
+}
+
+class G{ }
+class F extends G{}
+```
 
 ## 集合
 - 单列集合：Collection
