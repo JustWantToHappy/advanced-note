@@ -255,7 +255,8 @@ Collection是单列集合的祖宗接口，它的功能是全部单列即可都�
 	});
 ```
 > 总结：如果是普通遍历使用增强for循环或者lambda表达式，如果要在遍历过程中删除元素，则使用迭代器
-#### ArrayList
+#### List
+##### ArrayList
 - 自动扩容
 - 只能存储引用数据类型，如果要存储基本数据类型，需要转换为包装类
 底层原理：
@@ -284,7 +285,7 @@ Collection是单列集合的祖宗接口，它的功能是全部单列即可都�
 	ArrayList<Integer> intList=new ArrayList<>();
 	intList.add(1);
 ```
-#### LinkedList集合
+##### LinkedList集合
 底层数据结构是双链表，查询慢，首尾操作的速度还是很快的
 - public void addFirst(E e)
 - public void addLast(E e)
@@ -292,6 +293,56 @@ Collection是单列集合的祖宗接口，它的功能是全部单列即可都�
 - public E getLast()
 - public E removeFirst()
 - public E removeLast()
+
+#### Set
+##### Set集合的实现类
+- HashSet：无序、不重复、无索引
+- LinkedHashSet：有序、不重复、无索引
+- TreeSet：可排序、不重复、无索引
+```java
+		Set<String> set=new HashSet();
+		set.add("a");
+		//如果是是List接口的实现类，这里add方法返回值都是true,因为List实现类是允许元素可重复的，但是Set接口实现类是不允许的
+		if(!set.add("a")){
+				System.out.println("添加元素失败");
+		}
+		System.out.println(set.size());
+		System.out.println(set);//[a]
+```
+
+##### HashSet
+- HashSet集合底层是通过哈希表存储数据
+- JDK8之前是：数组+链表，JDK8开始：数组+链表+红黑树
+- 哈希值：根据hashCode方法计算出来的int类型的整数，该方法定义在Object类中，所有的对象都可以调用，默认使用地址值进行计算
+- 如果没有重写hashCode方法，不同对象计算出来的哈希值是不同的
+- 如果已经重写了hashCode方法，不同对象只要属性值相同，计算出来的哈希值是一样的
+- 在小部分情况下，不同属性值或者不同地址值计算出来的哈希值也可以是一样的(哈希碰撞)
+> 如果集合中存储的是自定义的对象，必须要重写hashCode方法以及equals方法
+
+![alt text](image-5.png)
+注意上图中说的加载因0.75指的是如果数组里面存了到达16*0.75=12个元素的时候，数组会进行扩容为原来的两倍，JDK8之后，如果链表长度超过8且数组长度大于等于64的时候，自动转换为红黑树
+```java
+public class App {
+    public static void main(String[] args)  {
+        Student s1=new Student();
+        Student s2=new Student();
+				//如果这里不重写hashCode方法，得到的哈希值是不一样的，打印结果为false
+        System.out.println(s1.hashCode()==s2.hashCode());//true
+    }
+}
+
+class Student{
+    private String name;
+    private int age;
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name,age);
+    }
+}
+```
+##### LinkedHashSet
+- 底层数据结构依然是哈希表，只是每个元素又额外多了一个双链表的机制记录存储的顺序
 
 ## Math类
 
