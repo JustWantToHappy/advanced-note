@@ -343,7 +343,123 @@ class Student{
 ```
 ##### LinkedHashSet
 - 底层数据结构依然是哈希表，只是每个元素又额外多了一个双链表的机制记录存储的顺序
+##### TreeSet
+- 可排序：按照元素默认规则（从小到大）进行排序
+- 对于数值类型：Integer、Double，默认按照从小到大的顺序进行排序
+- 对于字符、字符串类型：按照字符在ASCII码表中的数字升序进行排序
+**自定义排序的两种方式**
+1. 方式一：默认排序/自然排序：javaboolean类实现Comparable接口并指定比较规则
+```java
+public class App {
+    public static void main(String[] args)  {
+        TreeSet<Student> set = new TreeSet<>();
+        Student s1=new Student("小马",16);
+        Student s2=new Student("小牛",14);
+        Student s3=new Student("小狗",14);
+        set.add(s1);
+        set.add(s2);
+        set.add(s3);//被舍弃了
+        System.out.println(set);//[Student{name='小牛', age=14}, Student{name='小马', age=16}]
+    }
+}
+class Student implements Comparable<Student> {
+    private String name;
+    private int age;
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
 
+    public Student() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        //this表示当前要添加的元素，o:表示的是红黑树中已经存在的节点
+        //如果返回值是0：认为添加的元素已经存在，要舍弃
+        return this.age-o.age;
+    }
+}
+```
+2. 方式二：比较器排序：创建TreeSet对象的时候，传递比较器Comparator指定规则
+```java
+public class App {
+    public static void main(String[] args)  {
+        TreeSet<Student> set = new TreeSet<>(new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                return o1.getAge()-o2.getAge();
+            }
+        });
+        Student s1=new Student("小马",16);
+        Student s2=new Student("小牛",14);
+        set.add(s1);
+        set.add(s2);
+        System.out.println(set);//[Student{name='小牛', age=14}, Student{name='小马', age=16}]
+    }
+}
+
+class Student{
+    private String name;
+    private int age;
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public Student() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+```
+如果以上两种排序方式都存在，那方式二的优先级是高于方式一的，个人倾向于使用方式二，对javaboolean类代码入侵少且，同一个类如果要支持更多的排序规则，使用方式二也更加灵活
 ## Math类
 
 ```java
