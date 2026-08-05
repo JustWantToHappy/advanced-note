@@ -4,7 +4,7 @@
 
 ## Promise.any
 
-谁先“成功”用谁（失败的不算）
+第一个fulfilled的 promise 决定结果；只有全部 reject 才会拒绝
 
 ## Promise.race
 
