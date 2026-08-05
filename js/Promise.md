@@ -1,3 +1,31 @@
+## Promise状态吸收
+一个 Promise 的 resolve 值如果是另一个 Promise，那么外层 Promise 不会立刻 fulfilled，而是会“吸收”内层 Promise 的状态，最终跟随内层 Promise 的结果。（koa,express这些node框架的中间件实现原理就是promise的状态吸收）
+```javascript
+async function test(){
+	const lastPromise=new Promise(resolve=>{
+		setTimeout(() => {
+			resolve('result');
+		}, 2000);
+	})
+	const state=await new Promise(resolve=>resolve(lastPromise));//外层的promsise吸收内层promise的状态
+	console.log(state);//2s后输出result
+}
+test();
+```
+```javascript
+const promise=new Promise(resolve=>resolve(1));
+
+async function asyncTest(){
+	//async会返回一个新的Promise对象。如果返回值也是promise，这个新的对象就会吸收返回值promise的状态
+	return promise;
+}
+
+function test(){
+	return promise;
+}
+
+console.log(asyncTest()===test());//false
+```
 ## Promise.all
 
 等待所有的promise完成，如果有一个失败就立即失败
