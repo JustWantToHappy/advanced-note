@@ -54,9 +54,15 @@
 
 ## intial
 
-作用：用于设置默认值，如果某个css属性的默认值不清楚，则通过inital可以设置：
+作用：用于设置默认值， CSS 规范定义的初始值，不是浏览器默认值，也不是继承来的值：
 
-> line-height:intital;
+```css
+  div {
+    color: initial;      /* 重置为 color 的初始值（黑色） */
+    display: initial;    /* 重置为 inline（display 的初始值） */
+    font-size: initial;  /* 重置为 medium */
+  }
+```
 
 ## unset
 
