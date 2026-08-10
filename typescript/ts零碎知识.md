@@ -135,8 +135,7 @@ type B = ArrayIncludeTwo<[string, number]>; //true
 ```
 
 ## 几个小技巧
-
-- 基本上任何类型与any的交集都是any
+-  any 在 TypeScript 中是一个"逃逸舱口"，和任何类型做 & 操作，结果基本是 any。
 
 ```typescript
 type A = any & 1; //any
@@ -156,3 +155,4 @@ type C = string extends {} ? true : false;
 
 type D = { name: string } extends {} ? true : false;
 ```
+>  {} 在 TypeScript 中表示的是**"除了 null 和 undefined 之外的所有值"**

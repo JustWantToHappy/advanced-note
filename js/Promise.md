@@ -53,9 +53,9 @@ promise
   .then((res) => {
     console.log(res, "hhh"); //"error" "hhh"
   });
-//有问题
-const promise = Promise.resolve().then(() => {
-  return promise; //返回的是then包裹后的Promise的结果
-});
-promise.catch(console.err);
+	//死循环：TypeError: Chaining cycle detected for promise，原因解析：Promise.prototype.then会返回一个promise，而在then的回调中，promise A+规范进行了处理，如果回调函数返回值是then方法返回的promise本身，则拒绝并抛出错误
+	const promise = Promise.resolve().then(() => {
+		return promise; //返回的是then包裹后的Promise的结果
+	});
+	promise.catch(console.err);
 ```
