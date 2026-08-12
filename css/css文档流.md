@@ -113,6 +113,50 @@ css中有三种基本的定位机制：普通流，浮动流，定位流
 	</div>
 	<div class="float2">这是一段文字2</div>
 ```
+### 相对定位
+#### 静态定位
+position:static 静态定位就是我们的标准流，静态定位是HTML元素的默认值，静态定位的元素不会受到top、bottom、left、right的影响
+#### relative相对定位
+所谓相对定位，就是相对自己原来位置进行定位，相对定位的最大特定就是不脱离标准流，相对于自己原来的位置上进行一定的偏移
+![alt text](image-7.png)
+```html
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+
+		.app {
+			width: 100px;
+			height: 100px;
+			border: 1px solid #000;
+			/* 相对自己原来的位置向左偏移了50px */
+			left: 50px;
+			top: 50px;
+			position: relative;
+			text-align: center;
+		}
+	</style>
+	<body>
+	<div class="app">
+		app
+	</div>
+</body>
+```
+#### absolute绝对定位
+绝对定位就是相对离自己最近的，并且定了位的元素进行偏移，使用了绝对定位后的盒子，会脱离标准流，display会变成block
+- 绝对定位的参考点永远是离自己最近的，并且定了位的父级元素的左上角（子绝父相）
+
+#### fixed固定定位
+固定定位可以看作是一种特殊的绝对定位，所以也会脱离标准流，固定定位的特定是相对于浏览器窗口进行定位的，固定定位在PC端经常用于显示在页面中位置固定不变的页面header,以及移动端中位置固定不变的header和footer
+
+#### sticky粘性定位
+css3中新增的一种定位方式:sticky
+- 父元素不能够设置为overflow:hidden或者overflow:auto的属性(这里的父元素可以是嵌套的)
+- 如果父元素没有设置定位（position:relative|absolute|fixed），则相对于viewport进行定位，否则以定位的父元素为参考点
+- 设置阀值：必须指定top、bottom、left以及right其中之一，才能使粘性定位生效，否则其行为与相对定位相同
+- 父元素的高度不能够低于sticky元素的高度
+
 ### 脱离文档流
 Q: 脱离文档流就不占据空间了吗？
 

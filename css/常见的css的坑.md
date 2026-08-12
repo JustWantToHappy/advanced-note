@@ -61,12 +61,35 @@ position:fixed不一定就是相对窗口进行定位的，如果祖先元素开
 当一个弹窗或遮罩层（通常是固定定位）覆盖在页面上时，用户在弹窗上滑动手指，页面底层的元素也会跟着滚动，就好像滚动事件“穿透”到了下面一样
 
 # 外边距合并
-
-默认情况下，父元素和第一个or最后一个元素之间的垂直外边距会发生外边距合并（也可以发生在一个元素自身的外边距，比如marginTop和marginBottom）
+1. 兄弟元素之间
+```css
+  .top { margin-bottom: 30px; }
+  .bottom { margin-top: 20px; }
+  /* 实际间距是 max(30, 20) = 30px，而不是 50px */
+```
+2. 父子之间
+```css
+  .parent { margin-top: 0; }
+  .child { margin-top: 30px; }
+  /* 如果父元素没有 border/padding/overflow 隔离，30px 会"穿透"到父元素 */
+```
+3. 空元素自身
+```css
+  .empty { margin-top: 20px; margin-bottom: 30px; }
+  /* 上下 margin 会合并为 30px */
+```
+触发条件：
+- 必须是垂直方向上，水平方向上不会合并
+- 必须是块级元素，inline元素不会
+- 必须在同一个BFC中
 
 解决外边距合并有如下方法：
-
-1. 给父元素添加边框
-2. 给父元素添加内边距
-3. 使用overflow属性
-4. 使用浮动或者定位
+| 方法 | 适用场景 | 具体做法 | 示例 |
+|------|----------|----------|------|
+| 设置 BFC | 父子重叠 | 给**父元素**创建 BFC | `.parent { overflow: hidden; }` |
+| 设置 BFC | 兄弟重叠 | 给**其中一个兄弟**包裹一层 BFC 容器 | `<div style="overflow:hidden"><p>兄弟1</p></div>` |
+| 添加边框或内边距 | 父子重叠 | 给**父元素**加 border 或 padding | `.parent { border: 1px solid transparent; }` 或 `.parent { padding: 1px; }` |
+| 使用 Flexbox/Grid | 兄弟重叠 | 给**父容器**设置弹性/网格布局 | `.parent { display: flex; flex-direction: column; }` |
+| 直接改用 padding | 父子重叠 | 删掉**子元素**的 margin，改在**父元素**上设 padding | `.parent { padding-top: 30px; }`（子元素不再设 margin-top）
+|
+| 使用空元素隔离 | 兄弟重叠 | 在**两个兄弟之间**插入一个带 `display: flow-root` 的空容器 | `<div style="display:flow-root"></div>` 或使用伪元素`::before { content: ''; display: table; }` |
