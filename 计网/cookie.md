@@ -27,3 +27,9 @@ cookie 设计的初衷就是为了弥补 http 的无状态，帮助记录客户�
 2. sessionStorage和localStorage是没有默认行为的，前者用于保存会话级别的数据，后者用于更持久的保存数据
 3. cookie的大小是有限制的，一般浏览器同一个域下cookie的总量为4MB，而sessionStorage和localStorage则没有限制
 4. cookie会与domain、path关联，而sessionStorage和localStorage只有domain关联
+
+## cookie和session区别
+1. cookie数据保存在浏览器，session数据保存在服务器
+2. cookie存储空间有限，session存储空间不限
+3. cookie只能存储字符串，session可以存任意类型
+4. cookie数据容易获取，session不容易获取

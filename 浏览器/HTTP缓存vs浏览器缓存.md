@@ -25,7 +25,6 @@ http缓存都是从第二次请求开始的
 强缓存在缓存数据未失效的情况下(即Cache-Control的max-age没有过期或者说Expires的缓存时间没有过期),那么就会直接使用浏览器的缓存数据，不会再对浏览器发送任何请求，强制缓存生效的时候，http状态码是200,这中方式页面的加载速度是最快的，性能也是最好的
 但是如果这个期间，如果服务器端资源修改了，页面是拿不到的，因为它不会向服务端发送请求，因为走的是强缓存，这个时候我们Ctrl+F5刷新一下就行了
 
-注意：Pragma和Cache-Control共存的时候，Pragma的优先级是比Cache-Control高的
 在Chrom浏览器中返回的200状态会有两种情况:
 - from memory cache:(从内存中获取/一般缓存更新频率较高的js、图片，字体等资源)
 - from disk cache(从磁盘中获取/一般缓存更新频率较低的js、css等资源)
@@ -47,6 +46,7 @@ http缓存都是从第二次请求开始的
 ### Cache-Controller的指令
 - no-cache:禁用强缓存，直接进入协商缓存
 - no-store:禁用所有缓存，每次向服务端发送请求获取最新资源
+- max-age:缓存的时间，单位s
 
 > 一般html短缓存或者不缓存，这样每次请求到的html中引入的其他文件内容都是最新的，比如前端代码更新了，客户端也可以下一次访问页面的时候缓存最新的资源，但是如果要让html也走缓存，可以采用如下这种方式，service woker/web worker这个文件不缓存，html走缓存，如果资源更新了，修改这个woker文件，重新拉取最新html
 
@@ -73,3 +73,8 @@ http缓存都是从第二次请求开始的
     );
   });
 ```
+### Expires
+http1.0版本中，通过Expires响应头指定过期时间（是个绝对时间，国际标准时间），在http1.1中，基本使用Cache-Controller的max-age来记录了
+
+### Pragma
+http1.0的消息头，Pragma:no-cache，它和http1.1的Cache-Control:no-cache表示同样的含义
