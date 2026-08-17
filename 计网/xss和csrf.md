@@ -16,10 +16,9 @@ document.getElementById("msg").innerHTML = name;
 
 解决方法：
 
-1. 输入过滤
-2. 输出转义
-3. Http Only Cookie
-4. CSP(内容安全策略)：相当于白名单，限制网页可以加载和执行哪些资源
+1. 过滤：服务器去掉一些危险的标签，去掉一些危险的属性
+2. 编码：服务器对危险的标签进行HTML实体编码，比如<script></script>变成`&lt;script&gt;&lt;script/&gt;`，也可以让前端插入一段文本内容的时候使用textContent(编码后的)而不是innerHTML
+3. CSP(内容安全策略)：相当于白名单，限制网页可以加载和执行哪些资源。比如用户中招了，访问了xss攻击的script第三方js，使用csp可以限制执行
 
 ### CSP
 
@@ -55,7 +54,9 @@ Content-Security-Policy:
 
 解决方法
 
-1. csrf token，每个请求都加上这个token，跨站请求不会携带token
-2. SameSite Cookie(Set-Cookie: session=xxx; SameSite=Strict)，现代网站基本都开启。
+1. csrf token，一次性token，给容易发生csrf攻击且对用户影响大的请求加上，跨站请求不会携带这个token。比如上面的case,用户登录银行转账页面的时候，服务器发送一个csrf token回来，用户点击提交转账的时候同时提交这个token，后续
+2. SameSite Cookie,cookie的指令(Set-Cookie: session=xxx; samesite=strict)，现代网站基本都开启，解决的是浏览器要不要自动带上cookie的问题。
+	- 如果设置strict,跨域请求不会携带此cookie
+	- 如果设置lax，跨站请求是GET（"用户主动点链接"的 GET）会带，不是则不会带
 3. 服务器验证 Referer / Origin
 4. 二次确认，邮箱验证，手机短信验证码验证等
