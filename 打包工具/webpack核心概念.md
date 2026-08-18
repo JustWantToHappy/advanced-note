@@ -22,6 +22,7 @@ module.exports = {
 ## plugin
 
 扩展webpack功能
+- clean-webpack-plugin:清除输出目录
 
 ## 模式(mode)
 
@@ -42,3 +43,10 @@ module.exports = {
 - Chunks 可以是初始 Chunk（入口点生成的）、按需加载的 Chunk（通过动态导入生成的）、或者是共享 Chunk（包含被多个入口点引用的模块）
   **Bundle**:
   Bundle 是由 Webpack 打包生成的最终输出文件
+
+## webpack scope hoisting
+scope hoisting是webpack的内置优化，它是针对模块的优化，在生产环境打包时会自动开启，未开启scope hoisting时，webpack会将每个模块的代码放置到一个独立的函数环境中，这样是为了保证模块的作用域互不干扰
+
+而scope hoisting作用恰恰相反，是把多个模块的代码合并到一个函数环境中执行，在这一过程中，webpack会按照顺序正确的合并模块代码，这样做的好处是减少了函数调用，对运行效率有一定的提升，同时也降低了打包体积
+
+如果遇到了某些模块多次被其他模块引用，或者使用了动态导入的模块，或者是非esm的模块，都不会有scope hoisting
