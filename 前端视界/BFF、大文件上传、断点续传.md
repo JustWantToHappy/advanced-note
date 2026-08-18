@@ -59,3 +59,17 @@
 为什么我们通过浏览器访问一个图片链接，有时候是展示，有时候是直接下载。通过响应头Content-Type以及Content-Disposition字段判断：
 - Content-Type为image/png，image/jpeg等图片类型，浏览器知道是图片直接展示，如果是application/octet-stream或者application/zip等就会下载
 - 如果设置了 Content-Disposition: attachment; filename="photo.png",优先级更高，会触发浏览器下载
+
+## 断点续传
+### 下载
+需要客户端和服务器同时支持
+
+如果要实现下载时的断点续传，首先，服务器在响应的时候，需要在响应头中加入下面字段：`Accept-Ranges:bytes`
+
+1. head请求，询问文件信息
+2. 服务端响应字段`Content-Disposition:attachment`，`Accept-Ranges:bytes`以及`Content-Length:文件长度，单位字节`
+3. 客户端看到head方法响应头中有这些信息，表示服务器支持断点下载
+4. 客服端发送多个请求获取文件片段信息，比如请求头中携带字段：`Range:bytes=0-500`，获取的信息保存为临时文件（浏览器页面不支持，一般是桌面端应用比如迅雷）
+5. 所有碎片获取完毕，客户端将碎片信息组装成完整文件
+### 上传
+断点上传其实和上面的大文件上传流程是一样的，但是需要注意的是断点上传要求服务器持久化存储每个分片，如果只是在内存中存储，如果服务器重启，那续传只能在同一会话内生效
