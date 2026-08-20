@@ -27,9 +27,11 @@ const update = {
 
 ## updateQueue属性
 
-> 注意与hook.queue.pending的区别，FiberNode.updateQueue只针对类组件的批量更新
-
-- 批量更新，在一次更新操作中，React会遍历updateQueue链表，合并相同类型的更新操作，只执行最新的更新，这样可以提高更新的效率和性能
+- 对于类组件：更新队列(updateQueue)，含firstUpdate/lastUpdate，即多次setState的更新
+- 对于函数式组件：存储的是effect链表(useEffect/useLayoutEffect回调和依赖)，React 在 render 阶段收集 effect 时，会同时把有 effect 的 Fiber 串进一条全局的 effect 链（通过firstEffect/nextEffect），而不是在 commit 阶段重新从头遍历整棵 Fiber 树
+- rootFiber.firstEffect 是唯一的 effect 链入口，它同时承载两件事：
+  1. 每个节点的 DOM 变更标记（flags）。
+  2. 函数组件节点上的 useEffect/useLayoutEffect 回调（存在该节点的 updateQueue）。
 - 异步更新：当组件处于concurrent模式下的时候，React可以根据更新的优先级和时间片来进行适当的渲染工作
   ![Alt text](image-1.png)
 
@@ -40,7 +42,9 @@ const update = {
 ## React 架构
 
 react15：jsx——>render function——>vdom
+
 react16:jsx——> render function——>vdom——>fiber
+
 ![Alt text](image-3.png)
 
 ```tsx

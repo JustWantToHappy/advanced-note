@@ -15,8 +15,6 @@ useEffect(() => {
 }, []);
 ```
 
-![alt text](image-20.png)
-
 ### effectList
 
 上面提到的updateQueue保存的单向链表
