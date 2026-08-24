@@ -108,9 +108,9 @@ css中有三种基本的定位机制：普通流，浮动流，定位流
 			background-color: green;
 		}
 	</style>
-		<div class="app1">
+  	<div class="app1">
 		<div class="float1">这是一段文字1</div>
-	</div>
+		</div>
 	<div class="float2">这是一段文字2</div>
 ```
 ### 相对定位
