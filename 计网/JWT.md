@@ -22,10 +22,20 @@ JWT就是一个字符串（身份令牌），三部分组成：header(json对象
 - 高并发：JWT零存储，服务端存储压力小
 
 ## 双token机制
-- access token：直接用于接口鉴权，存活时间短，一般几十分钟
-- refresh token：只在access token过期后用来换新的access token，一般存活时间一个星期甚至一个月
-登录之后每次用户访问接口，携带access token，服务端判断token是否过期：如果过期，则响应401，客户端拦截响应后请求刷新access token的请求，请求参数是refresh token，如果refresh token没过期：服务端就会返回新的access token，客户端重新请求失败的业务接口。否则抛出401错误或者让用户页面重定向到登录界面。（refresh token一般存放在httpOnly的cookie中,access token只存放在内存中）
+- access token：直接用于接口鉴权，存活时间短（一般几十分钟），前端通常存放在内存变量中（不存 localStorage，防 XSS）。
+- refresh token：只在 access token 过期后用于换取新的 access token，存活时间长（一般一周到一个月），通常存放在 httpOnly + Secure + SameSite 的
+cookie 中。
+
 ```javascript
+  // ===== 请求拦截器：自动携带 access token =====
+  instance.interceptors.request.use((config) => {
+    const token = getAccessToken(); // 从内存取
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  })
+	
 	instance.interceptors.response.use(null, async err => {
 		if (err.response?.status === 401 && !err.config._retried) {
 			const { accessToken } = await refreshToken(); // 用 refresh token

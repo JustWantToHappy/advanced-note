@@ -6,7 +6,7 @@ cookie 设计的初衷就是为了弥补 http 的无状态，帮助记录客户�
 - value:值，比如身份编号的值，它可以是任意值
 - domain:域，domain指定了哪些主机可以接受cookie,(表示这个cookie属于哪个网站的，)如果不指定，该属性默认给同一个host设置Cookie,不包含子域名，如果指定了Domain,则一般包含子域名，因此，指定Domain比省略它的限制要少。例如：如果要设置Domain=niuma.org,则Cookie也包含在子域中,例如包含在sb.niuma.org
 - path:路径(表示这个cookie是属于该网站哪个基路径的)，path属性指定了一个URL路径，该URL路径必须存在于请求中，以便发送给Cookie标头,用于指定哪些路径下的请求可以访问和发送包含该Cookie的信息
-- secure:是否使用到安全传输
+- secure:是否使用到安全传输,设置了只在 HTTPS（加密连接）下才会被浏览器发送，HTTP 下不会发送
 - expire:过期时间（绝对时间），表示该cookie在什么时候过期
 如果一个cookie同时满足如下条件，则这个cookie会被附带到请求中：
 - cookie没有过期
