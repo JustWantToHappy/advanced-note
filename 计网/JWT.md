@@ -1,5 +1,5 @@
 ## JWT（JSON Web Token）
-JWT就是一个字符串（身份令牌），三部分组成：header(json对象base64编码,记录了整个令牌的类型和签名算法).payload(用户信息对象base64编码，密码，身份证，手机号这些敏感信息不要存放在payload，可存用户id，以及角色).signature（前面两部分连接起来之后，按照头部固定的签名算法对整个令牌进行签名，单向hash加密得到的字符串经过base64编码）。这部分主要用来验证是否被篡改，下次服务端接收到jwt，利用签名算法以及header+payload重新计算，是否和signature匹配。
+JWT就是一个字符串（身份令牌），三部分组成：header(json对象base64编码,记录了整个令牌的类型和签名算法).payload(用户信息对象base64编码，密码，身份证，手机号这些敏感信息不要存放在payload，可存用户id，以及角色).signature（前面两部分连接起来之后，按照头部固定的签名算法对整个令牌进行签名，带密钥的hash加密得到的字符串经过base64编码）。这部分主要用来验证是否被篡改，下次服务端接收到jwt，利用签名算法以及header+payload重新计算，是否和signature匹配。
 ### header
 ```javascript
 {
