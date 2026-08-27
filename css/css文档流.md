@@ -151,7 +151,7 @@ position:static 静态定位就是我们的标准流，静态定位是HTML元素
 固定定位可以看作是一种特殊的绝对定位，所以也会脱离标准流，固定定位的特定是相对于浏览器窗口进行定位的，固定定位在PC端经常用于显示在页面中位置固定不变的页面header,以及移动端中位置固定不变的header和footer
 
 #### sticky粘性定位
-css3中新增的一种定位方式:sticky
+css3中新增的一种定位方式:sticky，不会脱离标准文档流，它仍然占据着原来的位置空间
 - 父元素不能够设置为overflow:hidden或者overflow:auto的属性(这里的父元素可以是嵌套的)
 - 如果父元素没有设置定位（position:relative|absolute|fixed），则相对于viewport进行定位，否则以定位的父元素为参考点
 - 设置阀值：必须指定top、bottom、left以及right其中之一，才能使粘性定位生效，否则其行为与相对定位相同
