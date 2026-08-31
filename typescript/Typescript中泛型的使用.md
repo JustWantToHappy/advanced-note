@@ -138,8 +138,7 @@ type ReturnType<T> = T extends (...args: any[]) => infer R ? R : any;
 如果T extends这个函数，那么类型ReturnType就是R，否则就是any
 ```
 
-## 使用泛型创建对象
-
-这里待写。。。有点消化不了
-
-### 构造签名
+## 泛型类型 vs 泛型函数
+1. 泛型在外部：type AsyncFn<T> = ... → 泛型类型，使用时传 T，AsyncFn<number> 是具体类型
+2. 泛型在内部：type AsyncFn = <T>(...) => ... → 指向泛型函数，调用时才定 T，比如`await asyncFn<number>()`
+3. 关键区别：一个「定义时定 T」，一个「调用时定 T」
