@@ -24,7 +24,7 @@ function bbb() {
 ```
 
 ## param
-
+- 对象类型声明
 ```javascript
 /***
  * @param {Object} a
@@ -33,7 +33,13 @@ function bbb() {
  */
 function demo(a) {}
 ```
-
+- 函数类型声明
+```javascript
+/**
+ * @param {(x: number) => number} fn - 明确的函数签名 ✅
+ */
+function good(fn) {}
+```
 ## 可选属性
 
 ```javascript
@@ -68,6 +74,17 @@ let a;
  * @type TableRow
  */
 let a;
+```
+## 泛型
+```javascript
+/**
+ * @template T
+ * @param {T} value - 任意类型的值
+ * @returns {T} 原样返回
+ */
+function identity(value) {
+	return value;
+}
 ```
 
 ## ts中的注释
