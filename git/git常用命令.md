@@ -16,12 +16,14 @@ git pull = git fetch + git merge(从安全性角度出发，应该选择后者)�
 - git remote add origin 仓库地址(绑定远程仓库,注意可以绑定多个远程仓库),这个命令的意思就是给我的本地仓库添加一个名叫 <别名> 的远程仓库，地址是 <远程仓库地址>
 
 ## 日志相关
-
 - git status:用于显示工作目录和暂存区的状态。具体来说，它会列出在工作目录中已跟踪文件的状态（例如，哪些文件已被修改、哪些文件是新添加的、哪些文件已被删除），以及暂存区中已暂存（staged）的更改。
 - git log可以查看当前分支的提交记录以及**commit id**,这个commit id很重要，可以用来回滚
 - git diff命令：查看分支之间的差异
-  - git diff A...B
-  - git diff A..B
+  - git diff A...B --oneline：B分支比A分支多了哪些提交,其中--oneline表示一行展示一个提交信息，简洁
+  - git diff B..A：A分支比B分支多了哪些提交
+	- git diff A：本地分支与A分支的差异
+	- git diff --name-only A：分支A具体改了哪些文件，输出文件名称（**常用**）
+	- git diff：输出已修改但未add的文件内容
 - git reflog:它提供了本地仓库中 HEAD 和分支引用（branch references）的历史记录
 
 ## 分支相关
