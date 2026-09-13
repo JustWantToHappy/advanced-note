@@ -31,11 +31,11 @@ git pull = git fetch + git merge(从安全性角度出发，应该选择后者)�
 - git branch -a(查看服务器的所有分支以及自己所在的分支，远程分支颜色为红色)
 - git branch -D branchName删除本地分支
 - git push origin -d branchName删除远程分支
-- git branch -M main//作用就是将当前默认的分支重命名为main
-- git checkout -b 分支名称//基于当前的本地分支，新建一个本地分支
-- git checkout -b 分支1 分支2//基于分支2，创建本地分支1
+- git branch -M main：作用就是将当前默认的分支重命名为main
+- git checkout -b 分支名称：基于当前的本地分支，新建一个本地分支
+- git checkout -b 分支1 分支2：基于分支2，创建本地分支1
 - git checkout -track origin/branchName(切换为远程服务器上的命名为branchName的远程分支)
-- git checkout 分支名称//切换分支：推荐使用git switch切换分支，因为checkout的语义化不是很好，同时checkout还有丢弃变更文件的功能
+- git checkout 分支名称：切换分支，推荐使用git switch切换分支，因为checkout的语义化不是很好，同时checkout还有丢弃变更文件的功能
 - git pull origin master先将远程仓库中的信息同步到本地仓库中
 - git push origin master 将本地版本库推送到远程服务器，
   origin是远程主机，master表示是远程服务器上的master分支和本地分支重名的简写，分支名是可以修改的
