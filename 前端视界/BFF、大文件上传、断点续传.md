@@ -64,7 +64,7 @@
 ### 下载
 需要客户端和服务器同时支持
 
-如果要实现下载时的断点续传，首先，服务器在响应的时候，需要在响应头中加入下面字段：`Accept-Ranges:bytes`
+如果要实现断点下载，首先，服务器在响应的时候，需要在响应头中加入下面字段：`Accept-Ranges:bytes`
 
 1. head请求，询问文件信息
 2. 服务端响应字段`Content-Disposition:attachment`，`Accept-Ranges:bytes`以及`Content-Length:文件长度，单位字节`
