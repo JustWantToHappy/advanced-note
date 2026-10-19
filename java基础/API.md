@@ -182,6 +182,11 @@ class F extends G{}
 	- Set系列集合：添加的元素是无序、不重复的、无索引的
 ![alt text](image-4.png)
 - 双列集合：Map
+	- 双列集合一次需要添加一对数据，分别是键和值
+	- 键不能重复，值是可以重复的
+	- 键和值是一一对应的，每一个键只能找到自己对应的值
+	- 键+值这个整体我们称之为"键值对"或者"键值对对象"，在java中也被称为"Entry对象"
+![alt text](image-6.png)
 
 ### Collection
 #### Collction的基本方法
@@ -460,6 +465,53 @@ class Student{
 }
 ```
 如果以上两种排序方式都存在，那方式二的优先级是高于方式一的，个人倾向于使用方式二，对javaboolean类代码入侵少且，同一个类如果要支持更多的排序规则，使用方式二也更加灵活
+
+### Map
+#### Map的常见API
+类似js的Map
+- V put(K key,V value)：添加元素，如果添加的key是存在的，那就覆盖对应的值，并返回原有的值
+- V remove(Object key):根据键删除键值对元素
+- void clear()：移除所有键值对元素
+- boolean containsKey(Object key)：集合中是否包含指定的键
+- boolean containsValue(Object value)：集合中是否包含指定的值
+- boolean isEmpty()
+- int size()
+
+#### Map的遍历方式
+1. 第一种方式：键找值
+```java
+		Map<String,Integer> map=new HashMap();
+		map.put("a",1);
+		map.put("b",2);
+		Set<String> keys=map.keySet();
+		for(String s:keys){
+				System.out.println(s+"="+map.get(s));
+		}
+```
+2. 第二种方式：通过键值对
+```java
+ 	Map<String,Integer> map=new HashMap();
+	map.put("a",1);
+	map.put("b",2);
+	Set<Map.Entry<String,Integer>> set=map.entrySet();
+	for(Map.Entry<String,Integer> entry:set){
+			System.out.println(entry.getKey()+"="+entry.getValue());
+	}
+```
+3. 第三种方式
+```java
+ 	Map<String,Integer> map=new HashMap();
+	map.put("a",1);
+	map.put("b",2);
+	//如下匿名内部类的写法可以改成lambda表达式的方式
+	map.forEach(new BiConsumer<String, Integer>() {
+			@Override
+			public void accept(String s, Integer integer) {
+					System.out.println(s+"="+integer);
+			}
+	});
+```
+
 ## Math类
 
 ```java
