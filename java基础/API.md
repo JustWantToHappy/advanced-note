@@ -512,6 +512,12 @@ class Student{
 	});
 ```
 
+#### HashMap
+
+- HashMap是Map接口的实现类
+- HashMap和HashSet的底层原理都是哈希表结构，依赖hashCode方法和equals方法保证键的唯一，如果键存储的是自定义的对象，需要重写hashCode方法和equals方法
+
+
 ## Math类
 
 ```java
